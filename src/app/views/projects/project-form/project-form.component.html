@@ -1,0 +1,33 @@
+<app-sidebar></app-sidebar>
+
+
+<h1>Agregar un nuevo Proyecto</h1>
+<div class="project-form">
+  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Nombre:</label>
+      <input id="name" formControlName="name" type="text">
+    </div>
+    <div>
+      <label for="description">Descripción:</label>
+      <textarea id="description" formControlName="description"></textarea>
+    </div>
+    <div>
+      <label for="startDate">Fecha Inicio:</label>
+      <input id="startDate" formControlName="startDate" type="date">
+    </div>
+    <div>
+      <label for="endDate">Fecha Fin:</label>
+      <input id="endDate" formControlName="endDate" type="date">
+    </div>
+    <div>
+      <label for="status">Estado:</label>
+      <input id="status" formControlName="status" type="text">
+    </div>
+    <div>
+      <label for="userId">IdUsuario (líder):</label>
+      <input id="userId" formControlName="userId" type="number">
+    </div>
+    <button type="submit">Añadir Proyecto</button>
+  </form>
+</div>

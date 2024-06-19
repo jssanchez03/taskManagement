@@ -1,0 +1,90 @@
+<div class="sidebar close">
+  <div class="logo-details">
+    <i class='bx bx-menu' (click)="toggleSidebar()"></i>
+    <!-- <i class='bx bxl-c-plus-plus'></i> -->
+    <span class="logo_name">TaskMaster</span>
+  </div>
+  <ul class="nav-links">
+    <li>
+      <a routerLink="/home">
+        <i class='bx bx-home-alt'></i>
+        <span class="link_name">Inicio</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" routerLink="/home">Inicio</a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="iocn-link">
+        <a routerLink="/project-list">
+          <i class='bx bx-collection'></i>
+          <span class="link_name">Proyectos</span>
+        </a>
+        <i class='bx bxs-chevron-down arrow'></i>
+      </div>
+      <ul class="sub-menu">
+        <li><a class="link_name" routerLink="/project-list">Proyectos</a></li>
+        <li><a routerLink="/project-list">Lista de proyectos</a></li>
+        <li><a routerLink="/project-form">Añadir proyectos</a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="iocn-link">
+        <a routerLink="/home">
+          <i class='bx bx-task'></i>
+          <span class="link_name">Tareas</span>
+        </a>
+        <i class='bx bxs-chevron-down arrow'></i>
+      </div>
+      <ul class="sub-menu">
+        <li><a class="link_name" routerLink="/home">Tareas</a></li>
+        <li><a routerLink="/home">Lista de tareas</a></li>
+        <li><a routerLink="/home">Añadir tareas</a></li>
+      </ul>
+    </li>
+    <li>
+      <a routerLink="/home">
+        <i class='bx bxs-dashboard'></i>
+        <span class="link_name">Dashboard</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" routerLink="/home">Dashboard</a></li>
+      </ul>
+    </li>
+    <li>
+      <a routerLink="/home">
+        <i class='bx bx-group'></i>
+        <span class="link_name">Usuarios</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" routerLink="/home">Usuarios</a></li>
+      </ul>
+    </li>
+    <li>
+      <a routerLink="/home">
+        <i class='bx bx-user'></i>
+        <span class="link_name">Perfil</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" routerLink="/home">Perfil</a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="profile-details">
+        <div class="profile-content">
+          <img src="https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png" alt="profileImg">
+        </div>
+        <div class="name-job">
+          <div class="profile_name">Jair Sánchez</div>
+          <div class="job">Miembro</div>
+        </div>
+        <i class='bx bx-log-out'></i>
+      </div>
+    </li>
+  </ul>
+</div>
+<!-- <section class="home-section">
+  <div class="home-content">
+    <i class='bx bx-menu' (click)="toggleSidebar()"></i>
+  </div>
+</section> -->

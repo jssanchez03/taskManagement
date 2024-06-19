@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+  font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+  font-size: 2rem; /* Tamaño de fuente */
+  margin-bottom: 1rem; /* Margen inferior */
+  color: #333; /* Color del texto */
+  text-align: center;
+}
+.project-form {
+  max-width: 600px; /* Ancho máximo del formulario */
+  margin: 0 auto; /* Centrar el formulario en la página */
+
+  form {
+    background-color: #f8f9fa; /* Color de fondo del formulario */
+    padding: 2rem; /* Relleno interno del formulario */
+    border-radius: 8px; /* Borde redondeado */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+
+    label {
+      font-weight: bold; /* Texto de etiquetas en negrita */
+      margin-bottom: 0.5rem; /* Margen inferior para etiquetas */
+    }
+
+    input,
+    textarea {
+      width: 100%; /* Ancho completo para inputs y textarea */
+      padding: 0.5rem; /* Relleno interno */
+      margin-bottom: 1rem; /* Margen inferior */
+      border: 1px solid #ccc; /* Borde delgado */
+      border-radius: 4px; /* Borde redondeado */
+      transition: border-color 0.2s ease-in-out; /* Transición de color de borde */
+
+      &:focus {
+        outline: none; /* Eliminar borde de enfoque predeterminado */
+        border-color: #007bff; /* Color del borde al enfocarse */
+      }
+    }
+
+    button[type="submit"] {
+      background-color: #007bff; /* Color de fondo del botón */
+      color: #fff; /* Color del texto del botón */
+      border: none; /* Sin borde */
+      padding: 0.75rem 1.5rem; /* Relleno del botón */
+      border-radius: 4px; /* Borde redondeado */
+      cursor: pointer; /* Cursor apuntador */
+      transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out; /* Transiciones suaves */
+
+      &:hover {
+        background-color: #0056b3; /* Color de fondo al pasar el mouse */
+      }
+    }
+  }
+}

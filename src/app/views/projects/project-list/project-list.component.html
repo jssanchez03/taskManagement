@@ -1,0 +1,31 @@
+<app-sidebar></app-sidebar>
+
+
+<div class="project-list">
+  <table>
+    <thead>
+      <tr>
+        <th>Proyecto</th>
+        <th>Estado</th>
+        <th>Progreso</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let project of projects">
+        <td>{{ project.name }}</td>
+        <td>{{ project.status }}</td>
+        <td>
+          <div class="progress-bar">
+            <div class="progress" [style.width.%]="project.progress"></div>
+          </div>
+          {{ project.progress }}%
+        </td>
+        <td>
+          <button (click)="editProject(project)">Editar</button>
+          <button (click)="deleteProject(project)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
