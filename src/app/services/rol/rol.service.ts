@@ -36,7 +36,7 @@ export class RolService {
     })
   }
 
-  findById(id: string){
+  findById(id: number){
     return new Promise(resolve => {
       this.http.get(this.url + 'findById/' + id).subscribe({
         next:(data) =>{
@@ -49,7 +49,7 @@ export class RolService {
     })
   }
 
-  deleteById(id: string){
+  deleteById(id: number){
     return new Promise(resolve => {
       this.http.delete(this.url + 'deleteById/' + id).subscribe({
         next:(data) =>{
@@ -62,7 +62,7 @@ export class RolService {
     })
   }
 
-  updateById(id: string, data: any){
+  updateById(id: number, data: any){
     return new Promise(resolve => {
       this.http.put(this.url + 'updateById/' + id, data).subscribe({
         next:(data) =>{
