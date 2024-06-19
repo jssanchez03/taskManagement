@@ -3,7 +3,6 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { ProjectFormComponent } from './views/projects/project-form/project-form.component';
 import { ProjectListComponent } from './views/projects/project-list/project-list.component';
-import { LoginComponent } from './views/login/login.component';
 import { HomeComponent } from './views/home/home.component';
 import { LayoutComponent } from './views/layout/layout.component';
 
@@ -14,7 +13,6 @@ import { LayoutComponent } from './views/layout/layout.component';
     styleUrl: './app.component.css',
     imports: [RouterOutlet,
       RouterModule,
-      LoginComponent,
       ProjectFormComponent,
       ProjectListComponent,
       HomeComponent,
