@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
-
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 interface Project {
   name: string;
   status: string;
@@ -11,7 +12,8 @@ interface Project {
 @Component({
   selector: 'app-project-list',
   standalone: true,
-  imports: [CommonModule, SidebarComponent],
+  imports: [CommonModule, SidebarComponent,  TableModule,
+    ButtonModule,],
   templateUrl: './project-list.component.html',
   styleUrl: './project-list.component.css'
 })

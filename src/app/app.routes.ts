@@ -5,6 +5,8 @@ import { ProjectListComponent } from './views/projects/project-list/project-list
 import { HomeComponent } from './views/home/home.component';
 import { RolListComponent } from './views/rol/rol-list/rol-list.component';
 import { RolFormComponent } from './views/rol/rol-form/rol-form.component';
+import { TaskFormComponent } from './views/tasks/task-form/task-form.component';
+import { TaskListComponent } from './views/tasks/task-list/task-list.component';
 
 export const routes: Routes = [
   {
@@ -25,14 +27,21 @@ export const routes: Routes = [
     component: ProjectFormComponent,
   },
   {
-    path: 'rol-list',
-    component: RolListComponent
+    path: 'project-form',
+    component: ProjectFormComponent,
+  },
+  {
+    path: 'task-form',
+    component: TaskFormComponent,
+  },
+  {
+    path: 'task-list',
+    component: TaskListComponent,
   },
   {
     path: 'rol-form',
     component: RolFormComponent,
   },
-
 
 
 ];

@@ -1,31 +1,46 @@
 <app-sidebar></app-sidebar>
 
+<div class="landing-page min-h-screen flex flex-col justify-center items-center">
+  <header class="text-center">
+    <h1 class="text-4xl font-bold mb-4">Bienvenidos a Gestión de Proyectos</h1>
+    <p class="text-lg text-gray-700">Administra tus proyectos de manera eficiente.</p>
+  </header>
 
-<div class="project-list">
-  <table>
-    <thead>
-      <tr>
-        <th>Proyecto</th>
-        <th>Estado</th>
-        <th>Progreso</th>
-        <th>Opciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let project of projects">
-        <td>{{ project.name }}</td>
-        <td>{{ project.status }}</td>
-        <td>
-          <div class="progress-bar">
-            <div class="progress" [style.width.%]="project.progress"></div>
-          </div>
-          {{ project.progress }}%
-        </td>
-        <td>
-          <button (click)="editProject(project)">Editar</button>
-          <button (click)="deleteProject(project)">Eliminar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8">
+    <div class="table-responsive mt-8 rounded-lg overflow-hidden shadow-lg bg-white">
+      <h2 class="text-2xl px-6 py-4 bg-gray-200 text-gray-800 text-center text-white" style="background-color: #1d1b31;">Lista de Proyectos</h2>
+      <p-table [value]="projects" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }" class="w-full">
+        <ng-template pTemplate="header">
+          <tr class="bg-gray-300">
+            <th class="px-6 py-4 text-center">Proyecto</th>
+            <th class="px-6 py-4 text-center">Estado</th>
+            <th class="px-6 py-4 text-center">Progreso</th>
+            <th class="px-6 py-4 text-center">Opciones</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-project let-rowIndex="rowIndex">
+          <tr [ngClass]="{'bg-gray-100': rowIndex % 2 === 0, 'bg-white': rowIndex % 2 !== 0}" class="border-b border-gray-300">
+            <td class="px-6 py-4 text-center">{{ project.name }}</td>
+            <td class="px-6 py-4 text-center">{{ project.status }}</td>
+            <td class="px-6 py-4 w-32 text-center">
+              <div class="relative pt-1">
+                <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-300">
+                  <div [style.width.%]="project.progress" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-gray-500"></div>
+                </div>
+                <span>{{ project.progress }}%</span>
+              </div>
+            </td>
+            <td class="px-6 py-4 space-x-2 flex justify-center">
+              <button class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center" (click)="editProject(project)">
+                <i class="bx bx-edit mr-2"></i> Editar
+              </button>
+              <button class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg flex items-center justify-center" (click)="deleteProject(project)">
+                <i class="bx bx-trash mr-2"></i> Eliminar
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
 </div>

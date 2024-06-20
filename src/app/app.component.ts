@@ -5,6 +5,7 @@ import { ProjectFormComponent } from './views/projects/project-form/project-form
 import { ProjectListComponent } from './views/projects/project-list/project-list.component';
 import { HomeComponent } from './views/home/home.component';
 import { LayoutComponent } from './views/layout/layout.component';
+import { TaskFormComponent } from './views/tasks/task-form/task-form.component';
 
 @Component({
     selector: 'app-root',
@@ -15,6 +16,7 @@ import { LayoutComponent } from './views/layout/layout.component';
       RouterModule,
       ProjectFormComponent,
       ProjectListComponent,
+      TaskFormComponent,
       HomeComponent,
       LayoutComponent,
       SidebarComponent]

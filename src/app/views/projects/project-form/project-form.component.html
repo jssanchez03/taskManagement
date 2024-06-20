@@ -1,33 +1,52 @@
 <app-sidebar></app-sidebar>
 
+<div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+  <div class="text-center mb-6">
+    <h2 class="text-2xl font-bold text-gray-800">Agregar un nuevo Proyecto</h2>
+    <p class="text-gray-600">Complete el siguiente formulario para crear un nuevo proyecto.</p>
+  </div>
 
-<h1>Agregar un nuevo Proyecto</h1>
-<div class="project-form">
-  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="name">Nombre:</label>
-      <input id="name" formControlName="name" type="text">
+  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="grid gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="flex items-center">
+        <label for="name" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Nombre:</label>
+        <input id="name" formControlName="name" type="text" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+      </div>
+
+      <div class="flex items-center">
+        <label for="description" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Descripción:</label>
+        <textarea id="description" formControlName="description" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+      </div>
     </div>
-    <div>
-      <label for="description">Descripción:</label>
-      <textarea id="description" formControlName="description"></textarea>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="flex items-center">
+        <label for="startDate" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Fecha Inicio:</label>
+        <input id="startDate" formControlName="startDate" type="date" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+      </div>
+
+      <div class="flex items-center">
+        <label for="endDate" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Fecha Fin:</label>
+        <input id="endDate" formControlName="endDate" type="date" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+      </div>
     </div>
-    <div>
-      <label for="startDate">Fecha Inicio:</label>
-      <input id="startDate" formControlName="startDate" type="date">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="flex items-center">
+        <label for="status" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Estado:</label>
+        <input id="status" formControlName="status" type="text" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+      </div>
+
+      <div class="flex items-center">
+        <label for="userId" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Id de líder:</label>
+        <input id="userId" formControlName="userId" type="number" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+      </div>
     </div>
-    <div>
-      <label for="endDate">Fecha Fin:</label>
-      <input id="endDate" formControlName="endDate" type="date">
+
+    <div class="flex justify-center">
+      <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        Añadir Proyecto
+      </button>
     </div>
-    <div>
-      <label for="status">Estado:</label>
-      <input id="status" formControlName="status" type="text">
-    </div>
-    <div>
-      <label for="userId">IdUsuario (líder):</label>
-      <input id="userId" formControlName="userId" type="number">
-    </div>
-    <button type="submit">Añadir Proyecto</button>
   </form>
 </div>

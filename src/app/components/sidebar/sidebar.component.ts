@@ -44,7 +44,7 @@ export class SidebarComponent implements OnInit {
           this.renderer.setStyle(content, 'margin-left', '250px');
         } else {
           this.renderer.addClass(sidebar, 'close');
-          this.renderer.setStyle(content, 'margin-left', '60px');
+          this.renderer.setStyle(content, 'margin-left', '80px');
         }
       }
     }

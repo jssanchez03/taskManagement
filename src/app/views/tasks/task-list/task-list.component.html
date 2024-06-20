@@ -1,1 +1,47 @@
-<p>task-list works!</p>
+<app-sidebar></app-sidebar>
+
+<div class="landing-page min-h-screen flex flex-col justify-center items-center">
+  <header class="text-center">
+    <h1 class="text-4xl font-bold mb-4">Bienvenidos a Gestión de Tareas</h1>
+    <p class="text-lg text-gray-700">Administra tus proyectos y tareas de manera eficiente.</p>
+  </header>
+
+  <div class="mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8">
+    <div class="table-responsive mt-8 rounded-lg overflow-hidden shadow-lg bg-white">
+      <h2 class="text-2xl px-6 py-4 bg-gray-200 text-gray-800 text-center text-white" style="background-color: #1d1b31;">Lista de Tareas</h2>
+      <p-table [value]="tareas" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }" class="w-full">
+        <ng-template pTemplate="header">
+          <tr class="bg-gray-300">
+            <th class="px-6 py-4 text-center">Id</th>
+            <th class="px-6 py-4 text-center">Nombre</th>
+            <th class="px-6 py-4 text-center">Descripción</th>
+            <th class="px-6 py-4 text-center">Fecha Inicio</th>
+            <th class="px-6 py-4 text-center">Fecha Fin</th>
+            <th class="px-6 py-4 text-center">Proyecto ID</th>
+            <th class="px-6 py-4 text-center">Responsables</th>
+            <th class="px-6 py-4 text-center">Acciones</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-tarea let-rowIndex="rowIndex">
+          <tr class="border-b border-gray-300">
+            <td class="px-6 py-4">{{ tarea.id }}</td>
+            <td class="px-6 py-4">{{ tarea.nombre }}</td>
+            <td class="px-6 py-4">{{ tarea.descripcion }}</td>
+            <td class="px-6 py-4">{{ tarea.fechaInicio }}</td>
+            <td class="px-6 py-4">{{ tarea.fechaFin }}</td>
+            <td class="px-6 py-4">{{ tarea.proyectoId }}</td>
+            <td class="px-6 py-4">{{ getResponsablesNames(tarea.responsables) }}</td>
+            <td class="px-6 py-4 space-x-2 flex">
+              <button class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center" (click)="aceptarTarea(rowIndex)">
+                <i class="fas fa-check"></i>
+              </button>
+              <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg flex items-center justify-center" (click)="denegarTarea(rowIndex)">
+                <i class="fas fa-times"></i>
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
