@@ -43,23 +43,29 @@
       </ul>
     </li>
     <li>
-      <a routerLink="/home">
-        <i class='bx bx-group'></i>
-        <span class="link_name">Usuarios</span>
+      <div class="iocn-link">
+        <a routerLink="/user-list">
+          <i class='bx bx-group'></i>
+          <span class="link_name">Usuarios</span>
+        </a>
         <i class='bx bxs-chevron-down arrow'></i>
-      </a>
-      <ul class="sub-menu blank">
-        <li><a class="link_name" routerLink="/home">Usuarios</a></li>
+      </div>
+      <ul class="sub-menu">
+        <li><a class="link_name" routerLink="/user-list">Usuarios</a></li>
+        <li><a routerLink="/user-list">Lista de usuarios</a></li>
+        <li><a routerLink="/user-form">Añadir usuarios</a></li>
       </ul>
     </li>
     <li>
-      <a routerLink="/home">
-        <i class='bx bx-user'></i>
-        <span class="link_name">Roles</span>
+      <div class="iocn-link">
+        <a routerLink="/rol-list">
+          <i class='bx bx-user'></i>
+          <span class="link_name">Roles</span>
+        </a>
         <i class='bx bxs-chevron-down arrow'></i>
-      </a>
+      </div>
       <ul class="sub-menu">
-        <li><a class="link_name" routerLink="/rol">Roles</a></li>
+        <li><a class="link_name" routerLink="/rol-list">Roles</a></li>
         <li><a routerLink="/rol-list">Lista de roles</a></li>
         <li><a routerLink="/rol-form">Añadir roles</a></li>
       </ul>

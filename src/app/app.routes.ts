@@ -7,6 +7,8 @@ import { RolListComponent } from './views/rol/rol-list/rol-list.component';
 import { RolFormComponent } from './views/rol/rol-form/rol-form.component';
 import { TaskFormComponent } from './views/tasks/task-form/task-form.component';
 import { TaskListComponent } from './views/tasks/task-list/task-list.component';
+import { UserListComponent } from './views/user/user-list/user-list.component';
+import { UserFormComponent } from './views/user/user-form/user-form.component';
 
 export const routes: Routes = [
   {
@@ -27,23 +29,29 @@ export const routes: Routes = [
     component: ProjectFormComponent,
   },
   {
-    path: 'project-form',
-    component: ProjectFormComponent,
+    path: 'task-list',
+    component: TaskListComponent,
   },
   {
     path: 'task-form',
     component: TaskFormComponent,
   },
   {
-    path: 'task-list',
-    component: TaskListComponent,
+    path: 'rol-list',
+    component: RolListComponent,
   },
   {
     path: 'rol-form',
     component: RolFormComponent,
   },
-
-
+  {
+    path: 'user-list',
+    component: UserListComponent,
+  },
+  {
+    path: 'user-form',
+    component: UserFormComponent,
+  },
 ];
 
 @NgModule({
