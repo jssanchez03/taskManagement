@@ -1,3 +1,46 @@
 <app-sidebar></app-sidebar>
 
-<p>rol-form works!</p>
+<div class="flex justify-center items-center h-screen">
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <div class="text-center mb-6">
+      <h2 class="text-2xl font-bold text-gray-800">Gestión de Roles</h2>
+      <p class="text-gray-600">Complete el siguiente formulario para crear o actualizar un rol.</p>
+    </div>
+
+    <form [formGroup]="rolForm" (ngSubmit)="onSubmit()" class="grid gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex flex-col">
+          <label for="rolId" class="text-gray-700 font-bold mb-2">Rol ID</label>
+          <input id="rolId" formControlName="rolId" type="text" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <div *ngIf="rolForm.get('rolId')?.invalid && (rolForm.get('rolId')?.dirty || rolForm.get('rolId')?.touched)" class="text-red-500 mt-1">
+            <span *ngIf="rolForm.get('rolId')?.errors?.['required']">Ingrese un ID de rol</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col">
+          <label for="nombre" class="text-gray-700 font-bold mb-2">Nombre</label>
+          <input id="nombre" formControlName="nombre" type="text" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <div *ngIf="rolForm.get('nombre')?.invalid && (rolForm.get('nombre')?.dirty || rolForm.get('nombre')?.touched)" class="text-red-500 mt-1">
+            <span *ngIf="rolForm.get('nombre')?.errors?.['required']">Ingrese un nombre de rol</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+        <div class="flex flex-col">
+          <label for="descripcion" class="text-gray-700 font-bold mb-2">Descripción</label>
+          <textarea id="descripcion" formControlName="descripcion" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+          <div *ngIf="rolForm.get('descripcion')?.invalid && (rolForm.get('descripcion')?.dirty || rolForm.get('descripcion')?.touched)" class="text-red-500 mt-1">
+            <span *ngIf="rolForm.get('descripcion')?.errors?.['required']">Ingrese una descripción del rol</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center mt-4">
+        <button type="submit" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
