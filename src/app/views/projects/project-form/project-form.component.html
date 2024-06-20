@@ -1,10 +1,11 @@
 <app-sidebar></app-sidebar>
 
-<div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-  <div class="text-center mb-6">
-    <h2 class="text-2xl font-bold text-gray-800">Agregar un nuevo Proyecto</h2>
-    <p class="text-gray-600">Complete el siguiente formulario para crear un nuevo proyecto.</p>
-  </div>
+<div class="flex justify-center items-center h-screen">
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <div class="text-center mb-6">
+      <h2 class="text-2xl font-bold text-gray-800">Agregar un nuevo Proyecto</h2>
+      <p class="text-gray-600">Complete el siguiente formulario para crear un nuevo proyecto.</p>
+    </div>
 
   <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="grid gap-6">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -44,9 +45,10 @@
     </div>
 
     <div class="flex justify-center">
-      <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+      <button type="submit" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
         Añadir Proyecto
       </button>
     </div>
   </form>
+</div>
 </div>

@@ -1,56 +1,58 @@
 <app-sidebar></app-sidebar>
 
-<div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-  <div class="text-center mb-6">
-    <h2 class="text-2xl font-bold text-gray-800">Gestión de Tareas</h2>
-    <p class="text-gray-600">Complete el siguiente formulario para crear o actualizar una tarea.</p>
+<div class="flex justify-center items-center h-screen">
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <div class="text-center mb-6">
+      <h2 class="text-2xl font-bold text-gray-800">Añadir una nueva Tarea</h2>
+      <p class="text-gray-600">Complete el siguiente formulario para crear una nueva tarea.</p>
+    </div>
+
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="grid gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex items-center">
+          <label for="nombre" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Nombre</label>
+          <input id="nombre" formControlName="nombre" type="text" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        </div>
+
+        <div class="flex items-center">
+          <label for="descripcion" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Descripción</label>
+          <textarea id="descripcion" formControlName="descripcion" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex items-center">
+          <label for="fechaInicio" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Fecha Inicio</label>
+          <input id="fechaInicio" formControlName="fechaInicio" type="date" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        </div>
+
+        <div class="flex items-center">
+          <label for="fechaFin" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Fecha Fin</label>
+          <input id="fechaFin" formControlName="fechaFin" type="date" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex items-center">
+          <label for="proyectoId" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Proyecto</label>
+          <select id="proyectoId" formControlName="proyectoId" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option *ngFor="let proyecto of proyectos" [value]="proyecto">{{ proyecto }}</option>
+          </select>
+        </div>
+
+        <div class="flex items-center">
+          <label for="responsables" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Responsables</label>
+          <select id="responsables" formControlName="responsables" multiple class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option *ngFor="let usuario of usuarios" [value]="usuario">{{ usuario }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <button type="submit" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          Guardar
+        </button>
+      </div>
+    </form>
   </div>
-
-  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="grid gap-6">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="flex items-center">
-        <label for="nombre" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Nombre</label>
-        <input id="nombre" formControlName="nombre" type="text" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-      </div>
-
-      <div class="flex items-center">
-        <label for="descripcion" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Descripción</label>
-        <textarea id="descripcion" formControlName="descripcion" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="flex items-center">
-        <label for="fechaInicio" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Fecha Inicio</label>
-        <input id="fechaInicio" formControlName="fechaInicio" type="date" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-      </div>
-
-      <div class="flex items-center">
-        <label for="fechaFin" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Fecha Fin</label>
-        <input id="fechaFin" formControlName="fechaFin" type="date" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="flex items-center">
-        <label for="proyectoId" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Proyecto</label>
-        <select id="proyectoId" formControlName="proyectoId" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <option *ngFor="let proyecto of proyectos" [value]="proyecto">{{ proyecto }}</option>
-        </select>
-      </div>
-
-      <div class="flex items-center">
-        <label for="responsables" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Responsables</label>
-        <select id="responsables" formControlName="responsables" multiple class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <option *ngFor="let usuario of usuarios" [value]="usuario">{{ usuario }}</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="flex justify-center">
-      <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        Guardar
-      </button>
-    </div>
-  </form>
 </div>
