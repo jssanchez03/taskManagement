@@ -6,10 +6,27 @@
     <p class="text-lg text-gray-700">Administra tus proyectos de manera eficiente.</p>
   </header>
 
+  <div class="search-bar-container flex items-center justify-end px-4 mt-6">
+    <div class="relative">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (input)="searchProjects()"
+        placeholder="Buscar proyecto..."
+        class="pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+      >
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+        </svg>
+      </div>
+    </div>
+  </div>
+
   <div class="mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8">
     <div class="table-responsive mt-8 rounded-lg overflow-hidden shadow-lg bg-white">
       <h2 class="text-2xl px-6 py-4 bg-gray-200 text-gray-800 text-center text-white" style="background-color: #1d1b31;">Lista de Proyectos</h2>
-      <p-table [value]="projects" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }" class="w-full">
+      <p-table [value]="filteredProjects" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }" class="w-full">
         <ng-template pTemplate="header">
           <tr class="bg-gray-300">
             <th class="px-6 py-4 text-center">Proyecto</th>
@@ -31,10 +48,13 @@
               </div>
             </td>
             <td class="px-6 py-4 space-x-2 flex justify-center">
-              <button class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center" (click)="editProject(project)">
+              <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center" (click)="viewProject(project)">
+                <i class="bx bx-show mr-2"></i> Ver Tareas
+              </button>
+              <button class="bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center" (click)="editProject(project)">
                 <i class="bx bx-edit mr-2"></i> Editar
               </button>
-              <button class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg flex items-center justify-center" (click)="deleteProject(project)">
+              <button class="bg-gray-900 hover:bg-gray-800 text-white px-4 py-2 rounded-lg flex items-center justify-center" (click)="deleteProject(project)">
                 <i class="bx bx-trash mr-2"></i> Eliminar
               </button>
             </td>

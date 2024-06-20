@@ -1,5 +1,4 @@
 <app-sidebar></app-sidebar>
-
 <div class="landing-page min-h-screen flex flex-col justify-center items-center">
   <header class="text-center">
     <h1 class="text-4xl font-bold mb-4">Gestión de Roles</h1>
@@ -19,16 +18,16 @@
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rol let-rowIndex="rowIndex">
-          <tr class="border-b border-gray-300">
-            <td class="px-6 py-4">{{ rol.id }}</td>
-            <td class="px-6 py-4">{{ rol.nombre }}</td>
-            <td class="px-6 py-4">{{ rol.descripcion }}</td>
-            <td class="px-6 py-4 space-x-2 flex">
-              <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center" (click)="editarRol(rowIndex)">
-                <i class="fas fa-edit"></i>
+          <tr [ngClass]="{'bg-gray-100': rowIndex % 2 === 0, 'bg-white': rowIndex % 2 !== 0}" class="border-b border-gray-300">
+            <td class="px-6 py-4 text-center">{{ rol.id }}</td>
+            <td class="px-6 py-4 text-center">{{ rol.nombre }}</td>
+            <td class="px-6 py-4 text-center">{{ rol.descripcion }}</td>
+            <td class="px-6 py-4 space-x-2 flex justify-center">
+              <button class="bg-gray-800 hover:bg-gray-1000 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center" (click)="editarRol(rol)">
+                <i class="bx bx-edit mr-2"></i> Editar
               </button>
-              <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg flex items-center justify-center" (click)="eliminarRol(rowIndex)">
-                <i class="fas fa-trash"></i>
+              <button class="bg-gray-500 hover:bg-gray-500 text-white px-4 py-2 rounded-lg flex items-center justify-center" (click)="eliminarRol(rol)">
+                <i class="bx bx-trash mr-2"></i> Eliminar
               </button>
             </td>
           </tr>

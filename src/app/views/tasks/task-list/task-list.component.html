@@ -1,9 +1,8 @@
 <app-sidebar></app-sidebar>
-
 <div class="landing-page min-h-screen flex flex-col justify-center items-center">
   <header class="text-center">
     <h1 class="text-4xl font-bold mb-4">Bienvenidos a Gestión de Tareas</h1>
-    <p class="text-lg text-gray-700">Administra los usuarios de manera eficiente.</p>
+    <p class="text-lg text-gray-700">Administra las tareas de manera eficiente.</p>
   </header>
 
   <div class="mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8">
@@ -23,20 +22,20 @@
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-tarea let-rowIndex="rowIndex">
-          <tr class="border-b border-gray-300">
-            <td class="px-6 py-4">{{ tarea.id }}</td>
-            <td class="px-6 py-4">{{ tarea.nombre }}</td>
-            <td class="px-6 py-4">{{ tarea.descripcion }}</td>
-            <td class="px-6 py-4">{{ tarea.fechaInicio }}</td>
-            <td class="px-6 py-4">{{ tarea.fechaFin }}</td>
-            <td class="px-6 py-4">{{ tarea.proyectoId }}</td>
-            <td class="px-6 py-4">{{ getResponsablesNames(tarea.responsables) }}</td>
-            <td class="px-6 py-4 space-x-2 flex">
+          <tr [ngClass]="{'bg-gray-100': rowIndex % 2 === 0, 'bg-white': rowIndex % 2 !== 0}" class="border-b border-gray-300">
+            <td class="px-6 py-4 text-center">{{ tarea.id }}</td>
+            <td class="px-6 py-4 text-center">{{ tarea.nombre }}</td>
+            <td class="px-6 py-4 text-center">{{ tarea.descripcion }}</td>
+            <td class="px-6 py-4 text-center">{{ tarea.fechaInicio }}</td>
+            <td class="px-6 py-4 text-center">{{ tarea.fechaFin }}</td>
+            <td class="px-6 py-4 text-center">{{ tarea.proyectoId }}</td>
+            <td class="px-6 py-4 text-center">{{ getResponsablesNames(tarea.responsables) }}</td>
+            <td class="px-6 py-4 space-x-2 flex justify-center">
               <button class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center" (click)="aceptarTarea(rowIndex)">
-                <i class="fas fa-check"></i>
+                <i class="bx bx-check mr-2"></i> Aceptar
               </button>
               <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg flex items-center justify-center" (click)="denegarTarea(rowIndex)">
-                <i class="fas fa-times"></i>
+                <i class="bx bx-x mr-2"></i> Denegar
               </button>
             </td>
           </tr>
