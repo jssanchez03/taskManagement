@@ -10,20 +10,20 @@
     <form [formGroup]="rolForm" (ngSubmit)="onSubmit()" class="grid gap-6">
       <div class="grid grid-cols-1 gap-4">
         <div class="flex flex-col">
-          <label for="nombre" class="text-gray-700 font-bold mb-2">Nombre</label>
-          <input id="nombre" formControlName="nombre" type="text" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-          <div *ngIf="rolForm.get('nombre')?.invalid && (rolForm.get('nombre')?.dirty || rolForm.get('nombre')?.touched)" class="text-red-500 mt-1">
-            <span *ngIf="rolForm.get('nombre')?.errors?.['required']">Ingrese un nombre de rol</span>
+          <label for="name" class="text-gray-700 font-bold mb-2">Nombre</label>
+          <input id="name" formControlName="name" type="text" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <div *ngIf="rolForm.get('name')?.invalid && (rolForm.get('name')?.dirty || rolForm.get('name')?.touched)" class="text-red-500 mt-1">
+            <span *ngIf="rolForm.get('name')?.errors?.['required']">Ingrese un nombre de rol</span>
           </div>
         </div>
       </div>
 
       <div class="grid grid-cols-1 gap-4">
         <div class="flex flex-col">
-          <label for="descripcion" class="text-gray-700 font-bold mb-2">Descripción</label>
-          <textarea id="descripcion" formControlName="descripcion" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-          <div *ngIf="rolForm.get('descripcion')?.invalid && (rolForm.get('descripcion')?.dirty || rolForm.get('descripcion')?.touched)" class="text-red-500 mt-1">
-            <span *ngIf="rolForm.get('descripcion')?.errors?.['required']">Ingrese una descripción del rol</span>
+          <label for="description" class="text-gray-700 font-bold mb-2">Descripción</label>
+          <textarea id="description" formControlName="description" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+          <div *ngIf="rolForm.get('description')?.invalid && (rolForm.get('description')?.dirty || rolForm.get('description')?.touched)" class="text-red-500 mt-1">
+            <span *ngIf="rolForm.get('description')?.errors?.['required']">Ingrese una descripción del rol</span>
           </div>
         </div>
       </div>

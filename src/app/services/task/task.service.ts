@@ -23,7 +23,7 @@ export class TaskService {
     })
   }
 
-  listTasksByProject(id: number){
+  listTasksByProject(id: string){
     return new Promise(resolve => {
       this.http.get(this.url + 'listTasksByProject/' + id).subscribe({
         next:(data) =>{
@@ -36,7 +36,7 @@ export class TaskService {
     })
   }
 
-  findById(id: number){
+  findById(id: string){
     return new Promise(resolve => {
       this.http.get(this.url + 'findById/' + id).subscribe({
         next:(data) =>{
@@ -49,7 +49,7 @@ export class TaskService {
     })
   }
 
-  deleteById(id: number){
+  deleteById(id: string){
     return new Promise(resolve => {
       this.http.delete(this.url + 'deleteById/' + id).subscribe({
         next:(data) =>{
@@ -62,7 +62,7 @@ export class TaskService {
     })
   }
 
-  updateById(id: number, data: any){
+  updateById(id: string, data: any){
     return new Promise(resolve => {
       this.http.put(this.url + 'updateById/' + id, data).subscribe({
         next:(data) =>{

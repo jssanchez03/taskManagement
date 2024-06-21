@@ -5,6 +5,7 @@ import { SidebarComponent } from '../../../components/sidebar/sidebar.component'
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
+import { ProjectService } from '../../../services/project/project.service';
 
 interface Project {
   name: string;
@@ -28,16 +29,24 @@ interface Project {
 export class ProjectListComponent implements OnInit {
   searchTerm: string = '';
   filteredProjects: Project[] = [];
-  projects: Project[] = [
-    { name: 'Proyecto 1', status: 'En progreso', progress: 45 },
-    { name: 'Proyecto 2', status: 'Completado', progress: 100 },
-    { name: 'Proyecto 3', status: 'En espera', progress: 20 }
-  ];
+  projects: any;
 
-  constructor(private router: Router) {} // Inject Router
+  constructor(private router: Router,
+    private projectService: ProjectService
+  ) {} // Inject Router
 
   ngOnInit() {
-    this.filteredProjects = [...this.projects];
+    this.getAllProjects();
+  }
+
+  getAllProjects() {
+    this.projectService.listProjects().then((projects: any) => {
+      this.projects = projects;
+      this.filteredProjects = projects;
+      console.log(this.projects);
+    }).catch(error => {
+      console.error('Error al obtener los proyectos:', error);
+    });
   }
 
   editProject(project: Project) {
@@ -45,20 +54,22 @@ export class ProjectListComponent implements OnInit {
     // Implementar lógica de edición
   }
 
-  deleteProject(project: Project) {
-    console.log('Eliminar proyecto:', project);
-    this.projects = this.projects.filter(p => p !== project);
-    this.filteredProjects = this.filteredProjects.filter(p => p !== project);
+  async deleteProject(id: string) {
+    try{
+      await this.projectService.deleteById(id);
+      this.getAllProjects();
+    }catch{
+      console.error("Error el eliminar");
+    }
   }
 
-  viewProject(project: Project) {
-    console.log('Ver proyecto:', project);
-    this.router.navigate(['/task-list'], { queryParams: { projectName: project.name } }); // Redirigir a /task-list
+  viewProject(id: string) {
+    this.router.navigate(['/task-list'], { queryParams: { project: id } }); // Redirigir a /task-list
   }
 
   searchProjects() {
     if (this.searchTerm) {
-      this.filteredProjects = this.projects.filter(project =>
+      this.filteredProjects = this.projects.filter((project: { name: string; }) =>
         project.name.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     } else {

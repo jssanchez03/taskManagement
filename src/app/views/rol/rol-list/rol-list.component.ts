@@ -1,14 +1,16 @@
 import { SidebarComponent } from './../../../components/sidebar/sidebar.component';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
+import { RolService } from '../../../services/rol/rol.service';
 
 export interface Rol {
-  nombre: string;
-  descripcion: string;
+  id: string,
+  name: string;
+  description: string;
 }
 
 @Component({
@@ -24,22 +26,33 @@ export interface Rol {
   templateUrl: './rol-list.component.html',
   styleUrl: './rol-list.component.css'
 })
-export class RolListComponent {
-  roles: Rol[] = [
-    { nombre: 'Administrador', descripcion: 'Tiene acceso a todas las funcionalidades del sistema.' },
-    { nombre: 'Editor', descripcion: 'Puede crear y editar contenido.' },
-    { nombre: 'Lector', descripcion: 'Sólo puede leer contenido.' },
-    { nombre: 'Colaborador', descripcion: 'Puede contribuir con contenido.' }
-  ];
+export class RolListComponent implements OnInit{
 
+  roles: Rol[];
+  
+  constructor(public rolService: RolService){}
+
+  ngOnInit(): void {
+    this.getAllRoles();
+  }
+  
+  getAllRoles() {
+    this.rolService.listRoles().then(roles => this.roles = roles as Rol[]);
+  }
+  
   editarRol(rol: Rol) {
     console.log('Editar rol:', rol);
     // Implementar lógica de edición
   }
 
-  eliminarRol(rol: Rol) {
-    console.log('Eliminar rol:', rol);
-    // Implementar lógica de eliminación
-    this.roles = this.roles.filter(r => r !== rol);
+  async eliminarRol(idRol: string) {
+    try{
+      await this.rolService.deleteById(idRol);
+      console.log("Registro eliminado");
+        this.getAllRoles();
+    }catch{
+      console.error("Error el eliminar");
+    }
+    
   }
 }

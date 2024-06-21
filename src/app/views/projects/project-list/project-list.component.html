@@ -38,7 +38,7 @@
         <ng-template pTemplate="body" let-project let-rowIndex="rowIndex">
           <tr [ngClass]="{'bg-gray-100': rowIndex % 2 === 0, 'bg-white': rowIndex % 2 !== 0}" class="border-b border-gray-300">
             <td class="px-6 py-4 text-center">{{ project.name }}</td>
-            <td class="px-6 py-4 text-center">{{ project.status }}</td>
+            <td class="px-6 py-4 text-center">{{ project.state }}</td>
             <td class="px-6 py-4 w-32 text-center">
               <div class="relative pt-1">
                 <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-300">
@@ -48,13 +48,13 @@
               </div>
             </td>
             <td class="px-6 py-4 space-x-2 flex justify-center">
-              <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center" (click)="viewProject(project)">
+              <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center" (click)="viewProject(project.id)">
                 <i class="bx bx-show mr-2"></i> Ver Tareas
               </button>
               <button class="bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center" (click)="editProject(project)">
                 <i class="bx bx-edit mr-2"></i> Editar
               </button>
-              <button class="bg-gray-900 hover:bg-gray-800 text-white px-4 py-2 rounded-lg flex items-center justify-center" (click)="deleteProject(project)">
+              <button class="bg-gray-900 hover:bg-gray-800 text-white px-4 py-2 rounded-lg flex items-center justify-center" (click)="deleteProject(project.id)">
                 <i class="bx bx-trash mr-2"></i> Eliminar
               </button>
             </td>

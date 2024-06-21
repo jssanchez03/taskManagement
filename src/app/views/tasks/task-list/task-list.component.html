@@ -12,23 +12,23 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="bg-white rounded-lg p-4 shadow-sm">
           <p class="text-gray-600"><strong class="text-gray-800">Nombre del Proyecto:</strong></p>
-          <p class="text-lg">{{ proyectoInfo.nombreProyecto }}</p>
+          <p class="text-lg">{{ proyectoInfo?.project?.name }}</p>
         </div>
         <div class="bg-white rounded-lg p-4 shadow-sm">
           <p class="text-gray-600"><strong class="text-gray-800">Líder:</strong></p>
-          <p class="text-lg">{{ proyectoInfo.liderNombre }} {{ proyectoInfo.liderApellido }}</p>
+          <p class="text-lg">{{ proyectoInfo?.userLeader?.user?.name }} {{ proyectoInfo?.userLeader?.user?.lastname }}</p>
         </div>
         <div class="bg-white rounded-lg p-4 shadow-sm">
           <p class="text-gray-600"><strong class="text-gray-800">Fecha Inicial:</strong></p>
-          <p class="text-lg">{{ proyectoInfo.fechaInicial }}</p>
+          <p class="text-lg">{{ proyectoInfo?.project?.startDate }}</p>
         </div>
         <div class="bg-white rounded-lg p-4 shadow-sm">
           <p class="text-gray-600"><strong class="text-gray-800">Fecha Final:</strong></p>
-          <p class="text-lg">{{ proyectoInfo.fechaFinal }}</p>
+          <p class="text-lg">{{ proyectoInfo?.project?.endDate }}</p>
         </div>
         <div class="bg-white rounded-lg p-4 shadow-sm md:col-span-2">
           <p class="text-gray-600"><strong class="text-gray-800">Email:</strong></p>
-          <p class="text-lg">{{ proyectoInfo.email }}</p>
+          <p class="text-lg">{{ proyectoInfo?.userLeader?.user?.email }}</p>
         </div>
       </div>
     </div>
@@ -50,25 +50,25 @@
         <ng-template pTemplate="body" let-tarea let-rowIndex="rowIndex">
           <tr [ngClass]="{'bg-gray-100': rowIndex % 2 === 0, 'bg-white': rowIndex % 2 !== 0}"
             class="border-b border-gray-300">
-            <td class="px-6 py-4 text-center">{{ tarea.nombre }}</td>
-            <td class="px-6 py-4 text-center">{{ tarea.descripcion }}</td>
-            <td class="px-6 py-4 text-center">{{ tarea.fechaInicio }}</td>
-            <td class="px-6 py-4 text-center">{{ tarea.fechaFin }}</td>
-            <td class="px-6 py-4 text-center">{{ tarea.estado }}</td>
+            <td class="px-6 py-4 text-center">{{ tarea.name }}</td>
+            <td class="px-6 py-4 text-center">{{ tarea.description }}</td>
+            <td class="px-6 py-4 text-center">{{ tarea.startDate }}</td>
+            <td class="px-6 py-4 text-center">{{ tarea.endDate }}</td>
+            <td class="px-6 py-4 text-center">{{ tarea.state }}</td>
             <td class="px-6 py-4 space-x-2 flex justify-center">
               <button
                 class="bg-gray-500 hover:bg-gray-600  text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center"
-                (click)="verDetalles(rowIndex)">
+                (click)="verDetalles(tarea.id)">
                 <i class="bx bx-info-circle mr-2"></i>Detalles
               </button>
               <button
                 class="bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center"
-                (click)="editarTarea(rowIndex)">
+                (click)="editarTarea(tarea.id)">
                 <i class="bx bx-edit mr-2"></i> Editar
               </button>
               <button
                 class="bg-gray-900 hover:bg-gray-800 text-white px-4 py-2 rounded-lg flex items-center justify-center"
-                (click)="eliminarTarea(rowIndex)">
+                (click)="eliminarTarea(tarea.id)">
                 <i class="bx bx-trash"></i>
               </button>
             </td>
@@ -83,15 +83,15 @@
         <div class="space-y-4">
           <p class="flex items-center">
             <span class="text-gray-600 font-semibold w-28">Responsable:</span>
-            <span class="text-gray-800">{{ tareaSeleccionada?.responsable }}</span>
+            <span class="text-gray-800">{{ tareaSeleccionada?.responsibleObject?.user?.name }} {{ tareaSeleccionada?.responsibleObject?.user?.lastname }}</span>
           </p>
           <p class="flex items-center">
             <span class="text-gray-600 font-semibold w-28">Email:</span>
-            <span class="text-gray-800">{{ tareaSeleccionada?.email }}</span>
+            <span class="text-gray-800">{{ tareaSeleccionada?.responsibleObject?.user?.email }}</span>
           </p>
           <p class="flex items-center">
             <span class="text-gray-600 font-semibold w-28">Rol:</span>
-            <span class="text-gray-800">{{ tareaSeleccionada?.rol }}</span>
+            <span class="text-gray-800">{{ tareaSeleccionada?.responsibleObject?.rolName }}</span>
           </p>
         </div>
         <div class="mt-8 flex justify-end">

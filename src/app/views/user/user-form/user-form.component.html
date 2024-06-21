@@ -10,31 +10,31 @@
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="grid gap-6">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="flex flex-col">
-        <label for="nombres" class="text-gray-700 font-bold mb-2">Nombres</label>
-        <input id="nombres" formControlName="nombres" type="text" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-        <div *ngIf="userForm.get('nombres')?.invalid && (userForm.get('nombres')?.dirty || userForm.get('nombres')?.touched)" class="text-red-500 mt-1">
-          <span *ngIf="userForm.get('nombres')?.errors?.['required']">Ingrese los nombres</span>
-          <span *ngIf="userForm.get('nombres')?.errors?.['pattern']">Nombres no pueden tener números ni caracteres especiales</span>
+        <label for="name" class="text-gray-700 font-bold mb-2">Nombres</label>
+        <input id="name" formControlName="name" type="text" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        <div *ngIf="userForm.get('name')?.invalid && (userForm.get('name')?.dirty || userForm.get('name')?.touched)" class="text-red-500 mt-1">
+          <span *ngIf="userForm.get('name')?.errors?.['required']">Ingrese los name</span>
+          <span *ngIf="userForm.get('name')?.errors?.['pattern']">Nombres no pueden tener números ni caracteres especiales</span>
         </div>
       </div>
 
       <div class="flex flex-col">
-        <label for="apellidos" class="text-gray-700 font-bold mb-2">Apellidos</label>
-        <input id="apellidos" formControlName="apellidos" type="text" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-        <div *ngIf="userForm.get('apellidos')?.invalid && (userForm.get('apellidos')?.dirty || userForm.get('apellidos')?.touched)" class="text-red-500 mt-1">
-          <span *ngIf="userForm.get('apellidos')?.errors?.['required']">Ingrese los apellidos</span>
-          <span *ngIf="userForm.get('apellidos')?.errors?.['pattern']">Apellidos no pueden tener números ni caracteres especiales</span>
+        <label for="lastname" class="text-gray-700 font-bold mb-2">Apellidos</label>
+        <input id="lastname" formControlName="lastname" type="text" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        <div *ngIf="userForm.get('lastname')?.invalid && (userForm.get('lastname')?.dirty || userForm.get('lastname')?.touched)" class="text-red-500 mt-1">
+          <span *ngIf="userForm.get('lastname')?.errors?.['required']">Ingrese los lastname</span>
+          <span *ngIf="userForm.get('lastname')?.errors?.['pattern']">Apellidos no pueden tener números ni caracteres especiales</span>
         </div>
       </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="flex flex-col">
-        <label for="telefono" class="text-gray-700 font-bold mb-2">Teléfono</label>
-        <input id="telefono" formControlName="telefono" type="tel" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-        <div *ngIf="userForm.get('telefono')?.invalid && (userForm.get('telefono')?.dirty || userForm.get('telefono')?.touched)" class="text-red-500 mt-1">
-          <span *ngIf="userForm.get('telefono')?.errors?.['required']">Ingrese número un teléfono</span>
-          <span *ngIf="userForm.get('telefono')?.errors?.['pattern']">Teléfono inválido</span>
+        <label for="phone" class="text-gray-700 font-bold mb-2">Teléfono</label>
+        <input id="phone" formControlName="phone" type="tel" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        <div *ngIf="userForm.get('phone')?.invalid && (userForm.get('phone')?.dirty || userForm.get('phone')?.touched)" class="text-red-500 mt-1">
+          <span *ngIf="userForm.get('phone')?.errors?.['required']">Ingrese número un teléfono</span>
+          <span *ngIf="userForm.get('phone')?.errors?.['pattern']">Teléfono inválido</span>
         </div>
       </div>
 
@@ -50,27 +50,25 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="flex flex-col">
-        <label for="rol" class="text-gray-700 font-bold mb-2">Rol</label>
-        <select id="rol" formControlName="rol" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <option value="">Seleccione un rol</option>
-          <option value="admin">Administrador</option>
-          <option value="user">Usuario</option>
-          <option value="guest">Invitado</option>
+        <label for="idRol" class="text-gray-700 font-bold mb-2">Rol</label>
+        <select id="idRol" formControlName="idRol" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value=""> -- Seleccione un Rol -- </option>
+          <option *ngFor="let rol of roles" [value]="rol.id">{{ rol.name }}</option>
         </select>
-        <div *ngIf="userForm.get('rol')?.invalid && (userForm.get('rol')?.dirty || userForm.get('rol')?.touched)" class="text-red-500 mt-1">
-          <span *ngIf="userForm.get('rol')?.errors?.['required']">Rol requerido</span>
+        <div *ngIf="userForm.get('idRol')?.invalid && (userForm.get('idRol')?.dirty || userForm.get('idRol')?.touched)" class="text-red-500 mt-1">
+          <span *ngIf="userForm.get('idRol')?.errors?.['required']">Rol requerido</span>
         </div>
       </div>
 
       <div class="flex flex-col">
-        <label for="estado" class="text-gray-700 font-bold mb-2">Estado</label>
-        <select id="estado" formControlName="estado" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <option value="">Seleccione un estado</option>
-          <option value="activo">Activo</option>
-          <option value="inactivo">Inactivo</option>
+        <label for="state" class="text-gray-700 font-bold mb-2">Estado</label>
+        <select id="state" formControlName="state" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="">Seleccione un state</option>
+          <option value="Activo">Activo</option>
+          <option value="Inactivo">Inactivo</option>
         </select>
-        <div *ngIf="userForm.get('estado')?.invalid && (userForm.get('estado')?.dirty || userForm.get('estado')?.touched)" class="text-red-500 mt-1">
-          <span *ngIf="userForm.get('estado')?.errors?.['required']">Estado requerido</span>
+        <div *ngIf="userForm.get('state')?.invalid && (userForm.get('state')?.dirty || userForm.get('state')?.touched)" class="text-red-500 mt-1">
+          <span *ngIf="userForm.get('state')?.errors?.['required']">Estado requerido</span>
         </div>
       </div>
     </div>

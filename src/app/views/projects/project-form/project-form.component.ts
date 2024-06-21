@@ -2,11 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
+import { ProjectService } from '../../../services/project/project.service';
+import { UserService } from '../../../services/user/user.service';
 
-interface Leader {
-  id: number;
-  name: string;
-}
 
 @Component({
   selector: 'app-project-form',
@@ -17,21 +15,20 @@ interface Leader {
 })
 export class ProjectFormComponent implements OnInit {
   projectForm: FormGroup;
-  leaders: Leader[] = [
-    { id: 1, name: 'Juan Pérez' },
-    { id: 2, name: 'María González' },
-    { id: 3, name: 'Carlos Rodríguez' },
-    // Agrega más líderes según sea necesario
-  ];
+  users: any;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+    private projectService: ProjectService,
+    private userService: UserService
+  ) {
+    this.getAllUsersCombo();
     this.projectForm = this.fb.group({
       name: ['', Validators.required],
       description: [''],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      status: ['', Validators.required],
-      leaderId: ['', Validators.required]
+      state: ['', Validators.required],
+      idLeader: ['', Validators.required]
     });
   }
 
@@ -40,8 +37,21 @@ export class ProjectFormComponent implements OnInit {
   onSubmit() {
     if (this.projectForm.valid) {
       console.log('Formulario enviado', this.projectForm.value);
+      this.save(this.projectForm.value);
     } else {
       console.log('Formulario inválido');
+    }
+  }
+
+  getAllUsersCombo() {
+    this.userService.listUsersCombo().then(users => this.users = users);
+  }
+
+  async save(project: any){
+    try{
+      await this.projectService.save(project);
+    }catch{
+      console.error("Error al guardar proyecto");
     }
   }
 }

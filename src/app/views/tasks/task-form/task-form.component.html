@@ -9,61 +9,72 @@
     <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="grid gap-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="flex flex-col">
-          <label for="nombre" class="block text-gray-700 font-bold mb-2 md:mb-0">Nombre</label>
-          <input id="nombre" formControlName="nombre" type="text" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-          <div *ngIf="taskForm.get('nombre')?.invalid && (taskForm.get('nombre')?.dirty || taskForm.get('nombre')?.touched)" class="text-red-500">
-            <div *ngIf="taskForm.get('nombre')?.errors?.['required']">El nombre es obligatorio.</div>
+          <label for="name" class="block text-gray-700 font-bold mb-2 md:mb-0">Nombre</label>
+          <input id="name" formControlName="name" type="text" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+          <div *ngIf="taskForm.get('name')?.invalid && (taskForm.get('name')?.dirty || taskForm.get('name')?.touched)" class="text-red-500">
+            <div *ngIf="taskForm.get('name')?.errors?.['required']">El name es obligatorio.</div>
           </div>
         </div>
 
         <div class="flex flex-col">
-          <label for="descripcion" class="block text-gray-700 font-bold mb-2 md:mb-0">Descripción</label>
-          <textarea id="descripcion" formControlName="descripcion" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+          <label for="description" class="block text-gray-700 font-bold mb-2 md:mb-0">Descripción</label>
+          <textarea id="description" formControlName="description" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="flex flex-col">
-          <label for="fechaInicio" class="block text-gray-700 font-bold mb-2 md:mb-0">Fecha Inicio</label>
-          <input id="fechaInicio" formControlName="fechaInicio" type="date" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-          <div *ngIf="taskForm.get('fechaInicio')?.invalid && (taskForm.get('fechaInicio')?.dirty || taskForm.get('fechaInicio')?.touched)" class="text-red-500">
-            <div *ngIf="taskForm.get('fechaInicio')?.errors?.['required']">La fecha de inicio es obligatoria.</div>
+          <label for="startDate" class="block text-gray-700 font-bold mb-2 md:mb-0">Fecha Inicio</label>
+          <input id="startDate" formControlName="startDate" type="date" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+          <div *ngIf="taskForm.get('startDate')?.invalid && (taskForm.get('startDate')?.dirty || taskForm.get('startDate')?.touched)" class="text-red-500">
+            <div *ngIf="taskForm.get('startDate')?.errors?.['required']">La fecha de inicio es obligatoria.</div>
           </div>
         </div>
 
         <div class="flex flex-col">
-          <label for="fechaFin" class="block text-gray-700 font-bold mb-2 md:mb-0">Fecha Fin</label>
-          <input id="fechaFin" formControlName="fechaFin" type="date" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-          <div *ngIf="taskForm.get('fechaFin')?.invalid && (taskForm.get('fechaFin')?.dirty || taskForm.get('fechaFin')?.touched)" class="text-red-500">
-            <div *ngIf="taskForm.get('fechaFin')?.errors?.['required']">La fecha de fin es obligatoria.</div>
+          <label for="endDate" class="block text-gray-700 font-bold mb-2 md:mb-0">Fecha Fin</label>
+          <input id="endDate" formControlName="endDate" type="date" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+          <div *ngIf="taskForm.get('endDate')?.invalid && (taskForm.get('endDate')?.dirty || taskForm.get('endDate')?.touched)" class="text-red-500">
+            <div *ngIf="taskForm.get('endDate')?.errors?.['required']">La fecha de fin es obligatoria.</div>
           </div>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="flex flex-col">
-          <label for="responsable" class="block text-gray-700 font-bold mb-2 md:mb-0">Responsable</label>
-          <select id="responsable" formControlName="responsable" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option value="">Seleccione un responsable</option>
-            <option *ngFor="let usuario of usuarios" [value]="usuario">{{ usuario }}</option>
+          <label for="responsible" class="block text-gray-700 font-bold mb-2 md:mb-0">Responsable</label>
+          <select id="responsible" formControlName="responsible" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">Seleccione un responsible</option>
+            <option *ngFor="let user of users" [value]="user.id">{{ user.name }} {{ user.lastname }}</option>
           </select>
-          <div *ngIf="taskForm.get('responsable')?.invalid && (taskForm.get('responsable')?.dirty || taskForm.get('responsable')?.touched)" class="text-red-500">
-            <div *ngIf="taskForm.get('responsable')?.errors?.['required']">Debe seleccionar un responsable.</div>
+          <div *ngIf="taskForm.get('responsible')?.invalid && (taskForm.get('responsible')?.dirty || taskForm.get('responsible')?.touched)" class="text-red-500">
+            <div *ngIf="taskForm.get('responsible')?.errors?.['required']">Debe seleccionar un responsible.</div>
           </div>
         </div>
 
         <div class="flex flex-col">
-          <label for="estado" class="block text-gray-700 font-bold mb-2 md:mb-0">Estado</label>
-          <select id="estado" formControlName="estado" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option value="">Seleccione un estado</option>
+          <label for="projectId" class="block text-gray-700 font-bold mb-2 md:mb-0">Proyecto</label>
+          <select id="projectId" formControlName="projectId" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">Seleccione un proyecto</option>
+            <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+          </select>
+          <div *ngIf="taskForm.get('projectId')?.invalid && (taskForm.get('projectId')?.dirty || taskForm.get('projectId')?.touched)" class="text-red-500">
+            <div *ngIf="taskForm.get('projectId')?.errors?.['required']">Debe seleccionar un Proyecto.</div>
+          </div>
+        </div>
+
+        <div class="flex flex-col">
+          <label for="state" class="block text-gray-700 font-bold mb-2 md:mb-0">Estado</label>
+          <select id="state" formControlName="state" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">Seleccione un state</option>
             <option value="Listo">Listo</option>
             <option value="En progreso">En progreso</option>
             <option value="Pendiente">Pendiente</option>
             <option value="Interrumpida">Interrumpida</option>
             <option value="Atrasada">Atrasada</option>
           </select>
-          <div *ngIf="taskForm.get('estado')?.invalid && (taskForm.get('estado')?.dirty || taskForm.get('estado')?.touched)" class="text-red-500">
-            <div *ngIf="taskForm.get('estado')?.errors?.['required']">Debe seleccionar un estado.</div>
+          <div *ngIf="taskForm.get('state')?.invalid && (taskForm.get('state')?.dirty || taskForm.get('state')?.touched)" class="text-red-500">
+            <div *ngIf="taskForm.get('state')?.errors?.['required']">Debe seleccionar un state.</div>
           </div>
         </div>
       </div>

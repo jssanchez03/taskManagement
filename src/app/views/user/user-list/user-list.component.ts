@@ -6,17 +6,23 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../../services/user/user.service';
+
+type User = {
+  id: string;
+  name: string;
+  lastname: string;
+  phone: string;
+  email: string;
+  idRol: string;
+  state: string;
+}
 
 interface Usuario {
-  id: number;
-  nombres: string;
-  apellidos: string;
-  telefono: string;
-  email: string;
-  rol: string;
-  estado: string;
-  numProyectos?: number;
-  numTareas?: number;
+  user: User,
+  rolName: string,
+  numProjects: string,
+  numTasks: string
 }
 
 @Component({
@@ -34,75 +40,28 @@ interface Usuario {
   styleUrl: './user-list.component.css'
 })
 export class UserListComponent implements OnInit {
-  usuarios: Usuario[] = [
-    {
-      id: 1,
-      nombres: 'Juan',
-      apellidos: 'Pérez',
-      telefono: '123456789',
-      email: 'juan.perez@example.com',
-      rol: 'Administrador',
-      estado: 'Activo',
-      numProyectos: 5,
-      numTareas: 10
-    },
-    {
-      id: 2,
-      nombres: 'María',
-      apellidos: 'González',
-      telefono: '987654321',
-      email: 'maria.gonzalez@example.com',
-      rol: 'Usuario',
-      estado: 'Activo',
-      numProyectos: 3,
-      numTareas: 7
-    },
-    {
-      id: 3,
-      nombres: 'Carlos',
-      apellidos: 'Rodríguez',
-      telefono: '456789123',
-      email: 'carlos.rodriguez@example.com',
-      rol: 'Administrador',
-      estado: 'Inactivo',
-      numProyectos: 2,
-      numTareas: 4
-    },
-    {
-      id: 4,
-      nombres: 'Ana',
-      apellidos: 'Martínez',
-      telefono: '789123456',
-      email: 'ana.martinez@example.com',
-      rol: 'Invitado',
-      estado: 'Activo',
-      numProyectos: 1,
-      numTareas: 2
-    },
-    {
-      id: 5,
-      nombres: 'Luis',
-      apellidos: 'Sánchez',
-      telefono: '321654987',
-      email: 'luis.sanchez@example.com',
-      rol: 'Usuario',
-      estado: 'Activo',
-      numProyectos: 4,
-      numTareas: 8
-    }
-  ];
+  usuarios: Usuario[];
 
   modalVisible = false;
-  usuarioSeleccionado: Usuario | null = null;
+  usuarioSeleccionado: Usuario | null;
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.getAllUsers();
   }
 
-  verDetalles(usuario: Usuario): void {
-    this.usuarioSeleccionado = usuario;
-    this.modalVisible = true;
+  getAllUsers() {
+    this.userService.listUsers().then(usuarios => this.usuarios = usuarios as Usuario[]);
+  }
+
+  async verDetalles(id: string) {
+    try{
+      this.usuarioSeleccionado = await this.userService.findById(id) as Usuario;
+      this.modalVisible = true;
+    }catch{
+      console.error("Error al obtener usuario");
+    }
   }
 
   cerrarModal(): void {
@@ -114,8 +73,13 @@ export class UserListComponent implements OnInit {
     console.log('Editando usuario:', usuario);
   }
 
-  eliminarUsuario(usuario: Usuario): void {
-    console.log('Eliminando usuario:', usuario);
-    this.usuarios = this.usuarios.filter(u => u.id !== usuario.id);
+  async eliminarUsuario(id: string) {
+    try{
+      await this.userService.deleteById(id);
+      console.log("Registro eliminado");
+        this.getAllUsers();
+    }catch{
+      console.error("Error el eliminar");
+    }
   }
 }

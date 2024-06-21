@@ -15,27 +15,25 @@
             <th class="px-6 py-4 text-center">Apellidos</th>
             <th class="px-6 py-4 text-center">Teléfono</th>
             <th class="px-6 py-4 text-center">Email</th>
-            <th class="px-6 py-4 text-center">Rol</th>
             <th class="px-6 py-4 text-center">Estado</th>
             <th class="px-6 py-4 text-center">Opciones</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-usuario let-rowIndex="rowIndex">
           <tr [ngClass]="{'bg-gray-100': rowIndex % 2 === 0, 'bg-white': rowIndex % 2 !== 0}" class="border-b border-gray-300">
-            <td class="px-6 py-4 text-center">{{ usuario.nombres }}</td>
-            <td class="px-6 py-4 text-center">{{ usuario.apellidos }}</td>
-            <td class="px-6 py-4 text-center">{{ usuario.telefono }}</td>
+            <td class="px-6 py-4 text-center">{{ usuario.name }}</td>
+            <td class="px-6 py-4 text-center">{{ usuario.lastname }}</td>
+            <td class="px-6 py-4 text-center">{{ usuario.phone }}</td>
             <td class="px-6 py-4 text-center">{{ usuario.email }}</td>
-            <td class="px-6 py-4 text-center">{{ usuario.rol }}</td>
-            <td class="px-6 py-4 text-center">{{ usuario.estado }}</td>
+            <td class="px-6 py-4 text-center">{{ usuario.state }}</td>
             <td class="px-6 py-4 space-x-2 flex justify-center">
-              <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center" (click)="verDetalles(usuario)">
+              <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center" (click)="verDetalles(usuario.id)">
                 <i class="bx bx-info-circle mr-2"></i>Detalles
               </button>
               <button class="bg-gray-800 hover:bg-gray-1000 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center" (click)="editarUsuario(usuario)">
                 <i class="bx bx-edit"></i>
               </button>
-              <button class="bg-gray-500 hover:bg-gray-500 text-white px-4 py-2 rounded-lg flex items-center justify-center" (click)="eliminarUsuario(usuario)">
+              <button class="bg-gray-500 hover:bg-gray-500 text-white px-4 py-2 rounded-lg flex items-center justify-center" (click)="eliminarUsuario(usuario.id)">
                 <i class="bx bx-trash"></i>
               </button>
             </td>
@@ -52,19 +50,23 @@
       <div class="space-y-4">
         <p class="flex items-center">
           <span class="text-gray-600 font-semibold w-28">Nombres:</span>
-          <span class="text-gray-800">{{ usuarioSeleccionado?.nombres }}</span>
+          <span class="text-gray-800">{{ usuarioSeleccionado?.user?.name }}</span>
         </p>
         <p class="flex items-center">
           <span class="text-gray-600 font-semibold w-28">Apellidos:</span>
-          <span class="text-gray-800">{{ usuarioSeleccionado?.apellidos }}</span>
+          <span class="text-gray-800">{{ usuarioSeleccionado?.user?.lastname }}</span>
+        </p>
+        <p class="flex items-center">
+          <span class="text-gray-600 font-semibold w-28">Rol:</span>
+          <span class="text-gray-800">{{ usuarioSeleccionado?.rolName }}</span>
         </p>
         <p class="flex items-center">
           <span class="text-gray-600 font-semibold w-28">Proyectos:</span>
-          <span class="text-gray-800">{{ usuarioSeleccionado?.numProyectos }}</span>
+          <span class="text-gray-800">{{ usuarioSeleccionado?.numProjects }}</span>
         </p>
         <p class="flex items-center">
           <span class="text-gray-600 font-semibold w-28">Tareas:</span>
-          <span class="text-gray-800">{{ usuarioSeleccionado?.numTareas }}</span>
+          <span class="text-gray-800">{{ usuarioSeleccionado?.numTasks }}</span>
         </p>
       </div>
       <div class="mt-8 flex justify-end">
