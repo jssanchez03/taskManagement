@@ -1,0 +1,78 @@
+<app-sidebar></app-sidebar>
+<div class="flex justify-center items-center h-screen">
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <div class="text-center mb-6">
+      <h2 class="text-2xl font-bold text-gray-800">Editar Tarea</h2>
+      <p class="text-gray-600">Complete el siguiente formulario para editar una tarea.</p>
+    </div>
+
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="grid gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex flex-col">
+          <label for="name" class="block text-gray-700 font-bold mb-2 md:mb-0">Nombre</label>
+          <input id="name" formControlName="name" type="text" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+          <div *ngIf="taskForm.get('name')?.invalid && (taskForm.get('name')?.dirty || taskForm.get('name')?.touched)" class="text-red-500">
+            <div *ngIf="taskForm.get('name')?.errors?.['required']">El nombre es obligatorio</div>
+          </div>
+        </div>
+
+        <div class="flex flex-col">
+          <label for="description" class="block text-gray-700 font-bold mb-2 md:mb-0">Descripción</label>
+          <textarea id="description" formControlName="description" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex flex-col">
+          <label for="startDate" class="block text-gray-700 font-bold mb-2 md:mb-0">Fecha Inicio</label>
+          <input id="startDate" formControlName="startDate" type="date" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+          <div *ngIf="taskForm.get('startDate')?.invalid && (taskForm.get('startDate')?.dirty || taskForm.get('startDate')?.touched)" class="text-red-500">
+            <div *ngIf="taskForm.get('startDate')?.errors?.['required']">La fecha de inicio es obligatoria</div>
+          </div>
+        </div>
+
+        <div class="flex flex-col">
+          <label for="endDate" class="block text-gray-700 font-bold mb-2 md:mb-0">Fecha Fin</label>
+          <input id="endDate" formControlName="endDate" type="date" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+          <div *ngIf="taskForm.get('endDate')?.invalid && (taskForm.get('endDate')?.dirty || taskForm.get('endDate')?.touched)" class="text-red-500">
+            <div *ngIf="taskForm.get('endDate')?.errors?.['required']">La fecha de fin es obligatoria</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex flex-col">
+          <label for="responsible" class="block text-gray-700 font-bold mb-2 md:mb-0">Responsable</label>
+          <select id="responsible" formControlName="responsible" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">Seleccione un responsable</option>
+            <option *ngFor="let usuario of usuarios" [value]="usuario">{{ usuario }}</option>
+          </select>
+          <div *ngIf="taskForm.get('responsible')?.invalid && (taskForm.get('responsible')?.dirty || taskForm.get('responsible')?.touched)" class="text-red-500">
+            <div *ngIf="taskForm.get('responsible')?.errors?.['required']">Debe seleccionar un responsable</div>
+          </div>
+        </div>
+
+        <div class="flex flex-col">
+          <label for="state" class="block text-gray-700 font-bold mb-2 md:mb-0">Estado</label>
+          <select id="state" formControlName="state" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">Seleccione un estado</option>
+            <option value="Listo">Listo</option>
+            <option value="En progreso">En progreso</option>
+            <option value="Pendiente">Pendiente</option>
+            <option value="Interrumpida">Interrumpida</option>
+            <option value="Atrasada">Atrasada</option>
+          </select>
+          <div *ngIf="taskForm.get('state')?.invalid && (taskForm.get('state')?.dirty || taskForm.get('state')?.touched)" class="text-red-500">
+            <div *ngIf="taskForm.get('state')?.errors?.['required']">Debe seleccionar un estado</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <button type="submit" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" [disabled]="taskForm.invalid">
+          Editar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

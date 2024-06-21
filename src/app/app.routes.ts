@@ -9,6 +9,10 @@ import { TaskFormComponent } from './views/tasks/task-form/task-form.component';
 import { TaskListComponent } from './views/tasks/task-list/task-list.component';
 import { UserListComponent } from './views/user/user-list/user-list.component';
 import { UserFormComponent } from './views/user/user-form/user-form.component';
+import { UserEditComponent } from './views/user/user-edit/user-edit.component';
+import { TaskEditComponent } from './views/tasks/task-edit/task-edit.component';
+import { RolEditComponent } from './views/rol/rol-edit/rol-edit.component';
+import { ProjectEditComponent } from './views/projects/project-edit/project-edit.component';
 
 export const routes: Routes = [
   {
@@ -29,12 +33,20 @@ export const routes: Routes = [
     component: ProjectFormComponent,
   },
   {
+    path: 'project-edit',
+    component: ProjectEditComponent,
+  },
+  {
     path: 'task-list',
     component: TaskListComponent,
   },
   {
     path: 'task-form',
     component: TaskFormComponent,
+  },
+  {
+    path: 'task-edit',
+    component: TaskEditComponent,
   },
   {
     path: 'rol-list',
@@ -45,12 +57,20 @@ export const routes: Routes = [
     component: RolFormComponent,
   },
   {
+    path: 'rol-edit',
+    component: RolEditComponent,
+  },
+  {
     path: 'user-list',
     component: UserListComponent,
   },
   {
     path: 'user-form',
     component: UserFormComponent,
+  },
+  {
+    path: 'user-edit',
+    component: UserEditComponent,
   },
 ];
 
