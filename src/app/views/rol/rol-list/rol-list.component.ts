@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
 import { RolService } from '../../../services/rol/rol.service';
+import { Router } from '@angular/router';
 
 export interface Rol {
   id: string,
@@ -30,7 +31,9 @@ export class RolListComponent implements OnInit{
 
   roles: Rol[];
   
-  constructor(public rolService: RolService){}
+  constructor(public rolService: RolService,
+    public router: Router
+  ){}
 
   ngOnInit(): void {
     this.getAllRoles();
@@ -40,9 +43,8 @@ export class RolListComponent implements OnInit{
     this.rolService.listRoles().then(roles => this.roles = roles as Rol[]);
   }
   
-  editarRol(rol: Rol) {
-    console.log('Editar rol:', rol);
-    // Implementar lógica de edición
+  editarRol(rol: string) {
+    this.router.navigate(['rol-edit'], { queryParams: { rol: rol } });
   }
 
   async eliminarRol(idRol: string) {

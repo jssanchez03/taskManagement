@@ -2,11 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { ProjectService } from '../../../services/project/project.service';
+import { UserService } from '../../../services/user/user.service';
 
-interface Leader {
-  id: number;
-  name: string;
-}
 
 @Component({
   selector: 'app-project-edit',
@@ -17,56 +16,71 @@ interface Leader {
 })
 
 export class ProjectEditComponent implements OnInit {
-  @Input() projectData: any;
   projectForm: FormGroup;
-  leaders: Leader[] = [
-    { id: 1, name: 'Juan Pérez' },
-    { id: 2, name: 'María González' },
-    { id: 3, name: 'Carlos Rodríguez' },
-  ];
+  project: any;
+  projectId: string;
+  users: any;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,
+    private ActivatedRoute: ActivatedRoute,
+    private projectService: ProjectService,
+    private userService: UserService
+  ) {
+    this.ActivatedRoute.queryParams.subscribe(params => {
+      this.projectId = params['project'];
+    });
+    this.getProjectValues(this.projectId);
+  }
 
   ngOnInit(): void {
+    this.getAllUsersCombo();
+    
     this.projectForm = this.fb.group({
-      name: [this.projectData?.name || '', Validators.required],
-      description: [this.projectData?.description || ''],
-      startDate: [this.projectData?.startDate || '', Validators.required],
-      endDate: [this.projectData?.endDate || '', Validators.required],
-      status: [this.projectData?.status || '', Validators.required],
-      leaderId: [this.projectData?.leaderId || '', Validators.required]
+      name: [this.project?.project?.name, Validators.required],
+      description: [this.project?.project?.description],
+      startDate: [this.formatDate(this.project?.project?.startDate), Validators.required],
+      endDate: [this.formatDate(this.project?.project?.endDate), Validators.required],
+      status: [this.project?.project?.status, Validators.required],
+      idLeader: ['', Validators.required]
     });
   }
 
-  get name() {
-    return this.projectForm.get('name');
+  // Método para convertir la fecha al formato yyyy-MM-dd
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 
-  get description() {
-    return this.projectForm.get('description');
+  async getProjectValues(id: string){
+    try{ 
+      this.project = await this.projectService.findById(id);
+      console.log(this.project);
+    }catch{
+      console.error("Error al obtener proyecto");
+    }
   }
 
-  get startDate() {
-    return this.projectForm.get('startDate');
-  }
-
-  get endDate() {
-    return this.projectForm.get('endDate');
-  }
-
-  get status() {
-    return this.projectForm.get('status');
-  }
-
-  get leaderId() {
-    return this.projectForm.get('leaderId');
+  getAllUsersCombo() {
+    this.userService.listUsersCombo().then(users => this.users = users);
   }
 
   onSubmit() {
     if (this.projectForm.valid) {
       console.log('Formulario enviado', this.projectForm.value);
+      this.update(this.projectId, this.projectForm.value);
     } else {
       console.log('Formulario inválido');
+    }
+  }
+
+  async update(id: string, project: any){
+    try{
+      await this.projectService.updateById(id, project);
+    }catch{
+      console.error("Error al guardar proyecto");
     }
   }
 }

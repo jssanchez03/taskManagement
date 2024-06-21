@@ -50,15 +50,13 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="flex flex-col">
-          <label for="rol" class="text-gray-700 font-bold mb-2">Rol</label>
-          <select id="rol" formControlName="rol" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option value="">Seleccione un rol</option>
-            <option value="admin">Administrador</option>
-            <option value="user">Usuario</option>
-            <option value="guest">Invitado</option>
+          <label for="idRol" class="text-gray-700 font-bold mb-2">Rol</label>
+          <select id="idRol" formControlName="idRol" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value=""> -- Seleccione un Rol -- </option>
+            <option *ngFor="let rol of roles" [value]="rol.id">{{ rol.name }}</option>
           </select>
-          <div *ngIf="userForm.get('rol')?.invalid && (userForm.get('rol')?.dirty || userForm.get('rol')?.touched)" class="text-red-500 mt-1">
-            <span *ngIf="userForm.get('rol')?.errors?.['required']">Rol requerido</span>
+          <div *ngIf="userForm.get('idRol')?.invalid && (userForm.get('idRol')?.dirty || userForm.get('idRol')?.touched)" class="text-red-500 mt-1">
+            <span *ngIf="userForm.get('idRol')?.errors?.['required']">Rol requerido</span>
           </div>
         </div>
 
@@ -66,8 +64,8 @@
           <label for="state" class="text-gray-700 font-bold mb-2">Estado</label>
           <select id="state" formControlName="state" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
             <option value="">Seleccione un estado</option>
-            <option value="activo">Activo</option>
-            <option value="inactivo">Inactivo</option>
+            <option value="Activo">Activo</option>
+            <option value="Inactivo">Inactivo</option>
           </select>
           <div *ngIf="userForm.get('state')?.invalid && (userForm.get('state')?.dirty || userForm.get('state')?.touched)" class="text-red-500 mt-1">
             <span *ngIf="userForm.get('state')?.errors?.['required']">Estado requerido</span>

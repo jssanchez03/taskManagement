@@ -32,8 +32,8 @@ export class ProjectListComponent implements OnInit {
   projects: any;
 
   constructor(private router: Router,
-    private projectService: ProjectService
-  ) {} // Inject Router
+    private projectService: ProjectService,
+  ) {}
 
   ngOnInit() {
     this.getAllProjects();
@@ -49,9 +49,8 @@ export class ProjectListComponent implements OnInit {
     });
   }
 
-  editProject(project: Project) {
-    console.log('Editar proyecto:', project);
-    // Implementar lógica de edición
+  editProject(project: string) {
+    this.router.navigate(['project-edit'], { queryParams: { project: project } });
   }
 
   async deleteProject(id: string) {

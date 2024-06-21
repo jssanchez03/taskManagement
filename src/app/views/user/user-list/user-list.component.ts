@@ -45,7 +45,9 @@ export class UserListComponent implements OnInit {
   modalVisible = false;
   usuarioSeleccionado: Usuario | null;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+    public router: Router
+  ) { }
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -69,8 +71,8 @@ export class UserListComponent implements OnInit {
     this.usuarioSeleccionado = null;
   }
 
-  editarUsuario(usuario: Usuario): void {
-    console.log('Editando usuario:', usuario);
+  editarUsuario(user: string): void {
+    this.router.navigate(['user-edit'], { queryParams: { user: user } });
   }
 
   async eliminarUsuario(id: string) {
