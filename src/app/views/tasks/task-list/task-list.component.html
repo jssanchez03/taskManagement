@@ -52,8 +52,8 @@
             class="border-b border-gray-300">
             <td class="px-6 py-4 text-center">{{ tarea.name }}</td>
             <td class="px-6 py-4 text-center">{{ tarea.description }}</td>
-            <td class="px-6 py-4 text-center">{{ tarea.startDate }}</td>
-            <td class="px-6 py-4 text-center">{{ tarea.endDate }}</td>
+            <td class="px-6 py-4 text-center">{{ formatDate(tarea.startDate) }}</td>
+            <td class="px-6 py-4 text-center">{{ formatDate(tarea.endDate) }}</td>
             <td class="px-6 py-4 text-center">{{ tarea.state }}</td>
             <td class="px-6 py-4 space-x-2 flex justify-center">
               <button

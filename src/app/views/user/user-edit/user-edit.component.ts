@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RolService } from '../../../services/rol/rol.service';
 
 export interface Rol {
-  id: string,
+  id: string;
   name: string;
   description: string;
 }
@@ -17,7 +17,7 @@ export interface Rol {
   standalone: true,
   imports: [SidebarComponent, CommonModule, ReactiveFormsModule],
   templateUrl: './user-edit.component.html',
-  styleUrl: './user-edit.component.css'
+  styleUrls: ['./user-edit.component.css']
 })
 export class UserEditComponent implements OnInit {
   usuario: any;
@@ -26,44 +26,57 @@ export class UserEditComponent implements OnInit {
   userForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-    private userService: UserService,
-    public rolService: RolService,
-    private ActivatedRoute: ActivatedRoute
-  ) {
-    this.ActivatedRoute.queryParams.subscribe(params => {
-      this.userId = params['user'];
-    });
+              private userService: UserService,
+              public rolService: RolService,
+              private activatedRoute: ActivatedRoute) {
 
-    this.getUserValues(this.userId);
+    this.userForm = this.formBuilder.group({
+      cedula: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(\s[a-zA-Z]+)*$/)]],
+      lastname: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(\s[a-zA-Z]+)*$/)]],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      email: ['', [Validators.required, Validators.email]],
+      idRol: ['', Validators.required],
+      state: ['', Validators.required]
+    });
   }
 
   ngOnInit(): void {
-    this.getAllRoles();
-
-    this.userForm = this.formBuilder.group({
-      name: [this.usuario?.user.name, [Validators.required, Validators.pattern(/^[a-zA-Z]+(\s[a-zA-Z]+)*$/)]],
-      lastname: [this.usuario?.user.lastname, [Validators.required, Validators.pattern(/^[a-zA-Z]+(\s[a-zA-Z]+)*$/)]],
-      phone: [this.usuario.user.phone, [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-      email: [this.usuario.user.email, [Validators.required, Validators.email]],
-      idRol: [''],
-      state: ['', Validators.required]
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.userId = params['user'];
+      this.loadUser();
     });
 
+    this.getAllRoles();
+  }
+
+  async loadUser() {
+    if (this.userId) {
+      try {
+        this.usuario = await this.userService.findById(this.userId);
+        this.populateForm();
+      } catch {
+        console.error("Error al obtener usuario");
+      }
+    }
+  }
+
+  populateForm() {
     if (this.usuario) {
-      this.userForm.patchValue(this.usuario);
+      this.userForm.patchValue({
+        cedula: this.usuario.user.cedula,
+        name: this.usuario.user.name,
+        lastname: this.usuario.user.lastname,
+        phone: this.usuario.user.phone,
+        email: this.usuario.user.email,
+        idRol: this.usuario.user.idRol,
+        state: this.usuario.user.state
+      });
     }
   }
 
   getAllRoles() {
     this.rolService.listRoles().then(roles => this.roles = roles as Rol[]);
-  }
-
-  async getUserValues(id: string){
-    try{ 
-      this.usuario = await this.userService.findById(id);
-    }catch{
-      console.error("Error al obtener rol");
-    }
   }
 
   onSubmit(): void {
@@ -76,21 +89,21 @@ export class UserEditComponent implements OnInit {
     }
   }
 
-  public findInvalidControls() {
+  findInvalidControls() {
     const invalid = [];
     const controls = this.userForm.controls;
     for (const name in controls) {
-        if (controls[name].invalid) {
-            invalid.push(name);
-        }
+      if (controls[name].invalid) {
+        invalid.push(name);
+      }
     }
     return invalid;
-}
+  }
 
-  async update(idUser: string, user: any){
-    try{
+  async update(idUser: string, user: any) {
+    try {
       await this.userService.updateById(idUser, user);
-    }catch{
+    } catch {
       console.error("Error al guardar usuario");
     }
   }

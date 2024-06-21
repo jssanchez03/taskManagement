@@ -11,6 +11,7 @@
       <p-table [value]="usuarios" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }" class="w-full">
         <ng-template pTemplate="header">
           <tr class="bg-gray-300">
+            <th class="px-6 py-4 text-center">Cedula</th>
             <th class="px-6 py-4 text-center">Nombres</th>
             <th class="px-6 py-4 text-center">Apellidos</th>
             <th class="px-6 py-4 text-center">Teléfono</th>
@@ -21,6 +22,7 @@
         </ng-template>
         <ng-template pTemplate="body" let-usuario let-rowIndex="rowIndex">
           <tr [ngClass]="{'bg-gray-100': rowIndex % 2 === 0, 'bg-white': rowIndex % 2 !== 0}" class="border-b border-gray-300">
+            <td class="px-6 py-4 text-center">{{ usuario.cedula }}</td>
             <td class="px-6 py-4 text-center">{{ usuario.name }}</td>
             <td class="px-6 py-4 text-center">{{ usuario.lastname }}</td>
             <td class="px-6 py-4 text-center">{{ usuario.phone }}</td>

@@ -7,7 +7,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ProjectService } from '../../../services/project/project.service';
 import { TaskService } from '../../../services/task/task.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-list',
@@ -34,6 +34,7 @@ export class TaskListComponent implements OnInit {
   constructor(private projectService: ProjectService,
     private taskService: TaskService,
     public ActivatedRoute: ActivatedRoute,
+    public router: Router
   ) {
    }
 
@@ -85,8 +86,8 @@ export class TaskListComponent implements OnInit {
     this.tareaSeleccionada = null;
   }
 
-  editarTarea(index: number) {
-    console.log('Editando tarea:', this.tareas[index]);
+  editarTarea(task: string) {
+    this.router.navigate(['task-edit'], { queryParams: { task: task } });
   }
 
   async eliminarTarea(id: string) {

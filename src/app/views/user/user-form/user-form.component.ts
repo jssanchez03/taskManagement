@@ -36,6 +36,7 @@ export class UserFormComponent implements OnInit {
     this.getAllRoles();
 
     this.userForm = this.formBuilder.group({
+      cedula: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(\s[a-zA-Z]+)*$/)]],
       lastname: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(\s[a-zA-Z]+)*$/)]],
       phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],

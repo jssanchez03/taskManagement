@@ -30,11 +30,6 @@ export class ProjectEditComponent implements OnInit {
       this.projectId = params['project'];
     });
     this.getProjectValues(this.projectId);
-  }
-
-  ngOnInit(): void {
-    this.getAllUsersCombo();
-
     this.projectForm = this.fb.group({
       name: [this.project?.project?.name, Validators.required],
       description: [this.project?.project?.description],
@@ -43,6 +38,12 @@ export class ProjectEditComponent implements OnInit {
       state: [this.project?.project?.state, Validators.required],
       idLeader: ['', Validators.required]
     });
+  }
+
+  ngOnInit(): void {
+    this.getAllUsersCombo();
+    this.getProjectValues(this.projectId);
+
   }
 
   // Método para convertir la fecha al formato yyyy-MM-dd
