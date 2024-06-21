@@ -7,48 +7,57 @@
       <p class="text-gray-600">Complete el siguiente formulario para crear un nuevo proyecto.</p>
     </div>
 
-  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="grid gap-6">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="flex items-center">
-        <label for="name" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Nombre:</label>
-        <input id="name" formControlName="name" type="text" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+    <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="grid gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex items-center">
+          <label for="name" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Nombre:</label>
+          <input id="name" formControlName="name" type="text" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        </div>
+
+        <div class="flex items-center">
+          <label for="description" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Descripción:</label>
+          <textarea id="description" formControlName="description" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+        </div>
       </div>
 
-      <div class="flex items-center">
-        <label for="description" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Descripción:</label>
-        <textarea id="description" formControlName="description" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-      </div>
-    </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex items-center">
+          <label for="startDate" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Fecha Inicio:</label>
+          <input id="startDate" formControlName="startDate" type="date" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="flex items-center">
-        <label for="startDate" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Fecha Inicio:</label>
-        <input id="startDate" formControlName="startDate" type="date" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-      </div>
-
-      <div class="flex items-center">
-        <label for="endDate" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Fecha Fin:</label>
-        <input id="endDate" formControlName="endDate" type="date" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="flex items-center">
-        <label for="status" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Estado:</label>
-        <input id="status" formControlName="status" type="text" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        <div class="flex items-center">
+          <label for="endDate" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Fecha Fin:</label>
+          <input id="endDate" formControlName="endDate" type="date" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        </div>
       </div>
 
-      <div class="flex items-center">
-        <label for="userId" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Id de líder:</label>
-        <input id="userId" formControlName="userId" type="number" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-      </div>
-    </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex items-center">
+          <label for="status" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Estado:</label>
+          <select id="status" formControlName="status" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">Seleccione un estado</option>
+            <option value="Listo">Listo</option>
+            <option value="En progreso">En progreso</option>
+            <option value="Pendiente">Pendiente</option>
+            <option value="Estancado">Estancado</option>
+          </select>
+        </div>
 
-    <div class="flex justify-center">
-      <button type="submit" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        Añadir Proyecto
-      </button>
-    </div>
-  </form>
-</div>
+        <div class="flex items-center">
+          <label for="leaderId" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Líder:</label>
+          <select id="leaderId" formControlName="leaderId" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">Seleccione un líder</option>
+            <option *ngFor="let leader of leaders" [value]="leader.id">{{ leader.name }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <button type="submit" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          Añadir Proyecto
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

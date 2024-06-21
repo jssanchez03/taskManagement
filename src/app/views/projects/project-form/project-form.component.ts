@@ -3,6 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
 
+interface Leader {
+  id: number;
+  name: string;
+}
+
 @Component({
   selector: 'app-project-form',
   standalone: true,
@@ -12,6 +17,12 @@ import { SidebarComponent } from '../../../components/sidebar/sidebar.component'
 })
 export class ProjectFormComponent implements OnInit {
   projectForm: FormGroup;
+  leaders: Leader[] = [
+    { id: 1, name: 'Juan Pérez' },
+    { id: 2, name: 'María González' },
+    { id: 3, name: 'Carlos Rodríguez' },
+    // Agrega más líderes según sea necesario
+  ];
 
   constructor(private fb: FormBuilder) {
     this.projectForm = this.fb.group({
@@ -20,7 +31,7 @@ export class ProjectFormComponent implements OnInit {
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       status: ['', Validators.required],
-      userId: ['', Validators.required]
+      leaderId: ['', Validators.required]
     });
   }
 

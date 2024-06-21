@@ -1,5 +1,4 @@
 <app-sidebar></app-sidebar>
-
 <div class="flex justify-center items-center h-screen">
   <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
     <div class="text-center mb-6">
@@ -43,22 +42,28 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="flex flex-col">
-          <label for="proyectoId" class="block text-gray-700 font-bold mb-2 md:mb-0">Proyecto</label>
-          <select id="proyectoId" formControlName="proyectoId" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option *ngFor="let proyecto of proyectos" [value]="proyecto">{{ proyecto }}</option>
+          <label for="responsable" class="block text-gray-700 font-bold mb-2 md:mb-0">Responsable</label>
+          <select id="responsable" formControlName="responsable" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">Seleccione un responsable</option>
+            <option *ngFor="let usuario of usuarios" [value]="usuario">{{ usuario }}</option>
           </select>
-          <div *ngIf="taskForm.get('proyectoId')?.invalid && (taskForm.get('proyectoId')?.dirty || taskForm.get('proyectoId')?.touched)" class="text-red-500">
-            <div *ngIf="taskForm.get('proyectoId')?.errors?.['required']">El proyecto es obligatorio.</div>
+          <div *ngIf="taskForm.get('responsable')?.invalid && (taskForm.get('responsable')?.dirty || taskForm.get('responsable')?.touched)" class="text-red-500">
+            <div *ngIf="taskForm.get('responsable')?.errors?.['required']">Debe seleccionar un responsable.</div>
           </div>
         </div>
 
         <div class="flex flex-col">
-          <label for="responsables" class="block text-gray-700 font-bold mb-2 md:mb-0">Responsables</label>
-          <select id="responsables" formControlName="responsables" multiple class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option *ngFor="let usuario of usuarios" [value]="usuario">{{ usuario }}</option>
+          <label for="estado" class="block text-gray-700 font-bold mb-2 md:mb-0">Estado</label>
+          <select id="estado" formControlName="estado" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">Seleccione un estado</option>
+            <option value="Listo">Listo</option>
+            <option value="En progreso">En progreso</option>
+            <option value="Pendiente">Pendiente</option>
+            <option value="Interrumpida">Interrumpida</option>
+            <option value="Atrasada">Atrasada</option>
           </select>
-          <div *ngIf="taskForm.get('responsables')?.invalid && (taskForm.get('responsables')?.dirty || taskForm.get('responsables')?.touched)" class="text-red-500">
-            <div *ngIf="taskForm.get('responsables')?.errors?.['required']">Debe seleccionar al menos un responsable.</div>
+          <div *ngIf="taskForm.get('estado')?.invalid && (taskForm.get('estado')?.dirty || taskForm.get('estado')?.touched)" class="text-red-500">
+            <div *ngIf="taskForm.get('estado')?.errors?.['required']">Debe seleccionar un estado.</div>
           </div>
         </div>
       </div>

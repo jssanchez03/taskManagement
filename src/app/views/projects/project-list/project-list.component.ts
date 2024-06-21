@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'; // Import Router
 import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -22,7 +23,7 @@ interface Project {
     ButtonModule,
   ],
   templateUrl: './project-list.component.html',
-  styleUrl: './project-list.component.css'
+  styleUrls: ['./project-list.component.css']
 })
 export class ProjectListComponent implements OnInit {
   searchTerm: string = '';
@@ -32,6 +33,8 @@ export class ProjectListComponent implements OnInit {
     { name: 'Proyecto 2', status: 'Completado', progress: 100 },
     { name: 'Proyecto 3', status: 'En espera', progress: 20 }
   ];
+
+  constructor(private router: Router) {} // Inject Router
 
   ngOnInit() {
     this.filteredProjects = [...this.projects];
@@ -49,8 +52,8 @@ export class ProjectListComponent implements OnInit {
   }
 
   viewProject(project: Project) {
-    // Implementa la lógica para ver los detalles del proyecto
     console.log('Ver proyecto:', project);
+    this.router.navigate(['/task-list'], { queryParams: { projectName: project.name } }); // Redirigir a /task-list
   }
 
   searchProjects() {

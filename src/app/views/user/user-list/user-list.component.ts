@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
@@ -12,14 +13,17 @@ interface Usuario {
   apellidos: string;
   telefono: string;
   email: string;
-  idRol: number;
+  rol: string;
   estado: string;
+  numProyectos?: number;
+  numTareas?: number;
 }
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [SidebarComponent,
+  imports: [
+    SidebarComponent,
     CommonModule,
     TableModule,
     PaginatorModule,
@@ -37,8 +41,10 @@ export class UserListComponent implements OnInit {
       apellidos: 'Pérez',
       telefono: '123456789',
       email: 'juan.perez@example.com',
-      idRol: 1,
-      estado: 'Activo'
+      rol: 'Administrador',
+      estado: 'Activo',
+      numProyectos: 5,
+      numTareas: 10
     },
     {
       id: 2,
@@ -46,8 +52,10 @@ export class UserListComponent implements OnInit {
       apellidos: 'González',
       telefono: '987654321',
       email: 'maria.gonzalez@example.com',
-      idRol: 2,
-      estado: 'Activo'
+      rol: 'Usuario',
+      estado: 'Activo',
+      numProyectos: 3,
+      numTareas: 7
     },
     {
       id: 3,
@@ -55,8 +63,10 @@ export class UserListComponent implements OnInit {
       apellidos: 'Rodríguez',
       telefono: '456789123',
       email: 'carlos.rodriguez@example.com',
-      idRol: 1,
-      estado: 'Inactivo'
+      rol: 'Administrador',
+      estado: 'Inactivo',
+      numProyectos: 2,
+      numTareas: 4
     },
     {
       id: 4,
@@ -64,8 +74,10 @@ export class UserListComponent implements OnInit {
       apellidos: 'Martínez',
       telefono: '789123456',
       email: 'ana.martinez@example.com',
-      idRol: 3,
-      estado: 'Activo'
+      rol: 'Invitado',
+      estado: 'Activo',
+      numProyectos: 1,
+      numTareas: 2
     },
     {
       id: 5,
@@ -73,24 +85,37 @@ export class UserListComponent implements OnInit {
       apellidos: 'Sánchez',
       telefono: '321654987',
       email: 'luis.sanchez@example.com',
-      idRol: 2,
-      estado: 'Activo'
+      rol: 'Usuario',
+      estado: 'Activo',
+      numProyectos: 4,
+      numTareas: 8
     }
   ];
+
+  modalVisible = false;
+  usuarioSeleccionado: Usuario | null = null;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  editarUsuario(index: number): void {
-    // Implementa la lógica para editar el usuario
-    console.log('Editando usuario:', this.usuarios[index]);
+  verDetalles(usuario: Usuario): void {
+    this.usuarioSeleccionado = usuario;
+    this.modalVisible = true;
   }
 
-  eliminarUsuario(index: number): void {
-    // Implementa la lógica para eliminar el usuario
-    console.log('Eliminando usuario:', this.usuarios[index]);
-    this.usuarios.splice(index, 1);
+  cerrarModal(): void {
+    this.modalVisible = false;
+    this.usuarioSeleccionado = null;
+  }
+
+  editarUsuario(usuario: Usuario): void {
+    console.log('Editando usuario:', usuario);
+  }
+
+  eliminarUsuario(usuario: Usuario): void {
+    console.log('Eliminando usuario:', usuario);
+    this.usuarios = this.usuarios.filter(u => u.id !== usuario.id);
   }
 }

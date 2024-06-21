@@ -15,7 +15,6 @@ import { SidebarComponent } from '../../../components/sidebar/sidebar.component'
 })
 export class TaskFormComponent implements OnInit {
   taskForm: FormGroup;
-  proyectos = [];
   usuarios = [];
 
   constructor(
@@ -28,11 +27,10 @@ export class TaskFormComponent implements OnInit {
       descripcion: [''],
       fechaInicio: ['', Validators.required],
       fechaFin: ['', Validators.required],
-      proyectoId: ['', Validators.required],
-      responsables: [[], Validators.required]
+      responsable: ['', Validators.required],
+      estado: ['', Validators.required]
     });
 
-    this.loadProyectos();
     this.loadUsuarios();
   }
 

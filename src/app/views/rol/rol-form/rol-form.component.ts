@@ -20,7 +20,6 @@ export class RolFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.rolForm = this.formBuilder.group({
-      rolId: ['', Validators.required],
       nombre: ['', Validators.required],
       descripcion: ['', Validators.required]
     });

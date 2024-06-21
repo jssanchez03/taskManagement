@@ -24,7 +24,7 @@ export class UserFormComponent implements  OnInit {
       apellidos: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(\s[a-zA-Z]+)*$/)]],
       telefono: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       email: ['', [Validators.required, Validators.email, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+((gmail\.com)|(espe\.edu\.ec))$/)]],
-      idRol: ['', Validators.required],
+      rol: ['', Validators.required],
       estado: ['', Validators.required]
     });
   }

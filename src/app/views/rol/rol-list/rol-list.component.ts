@@ -6,9 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
 
-
 export interface Rol {
-  id: number;
   nombre: string;
   descripcion: string;
 }
@@ -28,10 +26,10 @@ export interface Rol {
 })
 export class RolListComponent {
   roles: Rol[] = [
-    { id: 1, nombre: 'Administrador', descripcion: 'Tiene acceso a todas las funcionalidades del sistema.' },
-    { id: 2, nombre: 'Editor', descripcion: 'Puede crear y editar contenido.' },
-    { id: 3, nombre: 'Lector', descripcion: 'Sólo puede leer contenido.' },
-    { id: 4, nombre: 'Colaborador', descripcion: 'Puede contribuir con contenido.' }
+    { nombre: 'Administrador', descripcion: 'Tiene acceso a todas las funcionalidades del sistema.' },
+    { nombre: 'Editor', descripcion: 'Puede crear y editar contenido.' },
+    { nombre: 'Lector', descripcion: 'Sólo puede leer contenido.' },
+    { nombre: 'Colaborador', descripcion: 'Puede contribuir con contenido.' }
   ];
 
   editarRol(rol: Rol) {

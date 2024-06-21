@@ -11,31 +11,32 @@
       <p-table [value]="usuarios" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }" class="w-full">
         <ng-template pTemplate="header">
           <tr class="bg-gray-300">
-            <th class="px-6 py-4 text-center">ID</th>
             <th class="px-6 py-4 text-center">Nombres</th>
             <th class="px-6 py-4 text-center">Apellidos</th>
             <th class="px-6 py-4 text-center">Teléfono</th>
             <th class="px-6 py-4 text-center">Email</th>
-            <th class="px-6 py-4 text-center">ID de Rol</th>
+            <th class="px-6 py-4 text-center">Rol</th>
             <th class="px-6 py-4 text-center">Estado</th>
             <th class="px-6 py-4 text-center">Opciones</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-usuario let-rowIndex="rowIndex">
           <tr [ngClass]="{'bg-gray-100': rowIndex % 2 === 0, 'bg-white': rowIndex % 2 !== 0}" class="border-b border-gray-300">
-            <td class="px-6 py-4 text-center">{{ usuario.id }}</td>
             <td class="px-6 py-4 text-center">{{ usuario.nombres }}</td>
             <td class="px-6 py-4 text-center">{{ usuario.apellidos }}</td>
             <td class="px-6 py-4 text-center">{{ usuario.telefono }}</td>
             <td class="px-6 py-4 text-center">{{ usuario.email }}</td>
-            <td class="px-6 py-4 text-center">{{ usuario.idRol }}</td>
+            <td class="px-6 py-4 text-center">{{ usuario.rol }}</td>
             <td class="px-6 py-4 text-center">{{ usuario.estado }}</td>
             <td class="px-6 py-4 space-x-2 flex justify-center">
+              <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center" (click)="verDetalles(usuario)">
+                <i class="bx bx-info-circle mr-2"></i>Detalles
+              </button>
               <button class="bg-gray-800 hover:bg-gray-1000 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center" (click)="editarUsuario(usuario)">
-                <i class="bx bx-edit mr-2"></i> Editar
+                <i class="bx bx-edit"></i>
               </button>
               <button class="bg-gray-500 hover:bg-gray-500 text-white px-4 py-2 rounded-lg flex items-center justify-center" (click)="eliminarUsuario(usuario)">
-                <i class="bx bx-trash mr-2"></i> Eliminar
+                <i class="bx bx-trash"></i>
               </button>
             </td>
           </tr>
@@ -43,4 +44,36 @@
       </p-table>
     </div>
   </div>
+
+  <!-- Modal -->
+  <div *ngIf="modalVisible" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center z-50">
+    <div class="bg-white p-8 rounded-xl shadow-2xl max-w-md w-full mx-4 transform transition-all duration-300 ease-in-out">
+      <h3 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">Detalles del Usuario</h3>
+      <div class="space-y-4">
+        <p class="flex items-center">
+          <span class="text-gray-600 font-semibold w-28">Nombres:</span>
+          <span class="text-gray-800">{{ usuarioSeleccionado?.nombres }}</span>
+        </p>
+        <p class="flex items-center">
+          <span class="text-gray-600 font-semibold w-28">Apellidos:</span>
+          <span class="text-gray-800">{{ usuarioSeleccionado?.apellidos }}</span>
+        </p>
+        <p class="flex items-center">
+          <span class="text-gray-600 font-semibold w-28">Proyectos:</span>
+          <span class="text-gray-800">{{ usuarioSeleccionado?.numProyectos }}</span>
+        </p>
+        <p class="flex items-center">
+          <span class="text-gray-600 font-semibold w-28">Tareas:</span>
+          <span class="text-gray-800">{{ usuarioSeleccionado?.numTareas }}</span>
+        </p>
+      </div>
+      <div class="mt-8 flex justify-end">
+        <button (click)="cerrarModal()"
+          class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
+

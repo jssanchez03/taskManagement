@@ -2,45 +2,106 @@
 <div class="landing-page min-h-screen flex flex-col justify-center items-center">
   <header class="text-center">
     <h1 class="text-4xl font-bold mb-4">Bienvenidos a Gestión de Tareas</h1>
-    <p class="text-lg text-gray-700">Administra las tareas de manera eficiente.</p>
+    <p class="text-lg text-gray-700 mb-4">Administra las tareas de manera eficiente.</p>
   </header>
 
   <div class="mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8">
+
+    <div class="bg-gray-200 shadow-md rounded-lg p-8 mb-8 max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Información del Proyecto</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-lg p-4 shadow-sm">
+          <p class="text-gray-600"><strong class="text-gray-800">Nombre del Proyecto:</strong></p>
+          <p class="text-lg">{{ proyectoInfo.nombreProyecto }}</p>
+        </div>
+        <div class="bg-white rounded-lg p-4 shadow-sm">
+          <p class="text-gray-600"><strong class="text-gray-800">Líder:</strong></p>
+          <p class="text-lg">{{ proyectoInfo.liderNombre }} {{ proyectoInfo.liderApellido }}</p>
+        </div>
+        <div class="bg-white rounded-lg p-4 shadow-sm">
+          <p class="text-gray-600"><strong class="text-gray-800">Fecha Inicial:</strong></p>
+          <p class="text-lg">{{ proyectoInfo.fechaInicial }}</p>
+        </div>
+        <div class="bg-white rounded-lg p-4 shadow-sm">
+          <p class="text-gray-600"><strong class="text-gray-800">Fecha Final:</strong></p>
+          <p class="text-lg">{{ proyectoInfo.fechaFinal }}</p>
+        </div>
+        <div class="bg-white rounded-lg p-4 shadow-sm md:col-span-2">
+          <p class="text-gray-600"><strong class="text-gray-800">Email:</strong></p>
+          <p class="text-lg">{{ proyectoInfo.email }}</p>
+        </div>
+      </div>
+    </div>
+
     <div class="table-responsive mt-8 rounded-lg overflow-hidden shadow-lg bg-white">
-      <h2 class="text-2xl px-6 py-4 bg-gray-200 text-gray-800 text-center text-white" style="background-color: #1d1b31;">Lista de Tareas</h2>
+      <h2 class="text-2xl px-6 py-4 bg-gray-200 text-gray-800 text-center text-white"
+        style="background-color: #1d1b31;">Lista de Tareas</h2>
       <p-table [value]="tareas" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }" class="w-full">
         <ng-template pTemplate="header">
           <tr class="bg-gray-300">
-            <th class="px-6 py-4 text-center">Id</th>
             <th class="px-6 py-4 text-center">Nombre</th>
             <th class="px-6 py-4 text-center">Descripción</th>
             <th class="px-6 py-4 text-center">Fecha Inicio</th>
             <th class="px-6 py-4 text-center">Fecha Fin</th>
-            <th class="px-6 py-4 text-center">Proyecto ID</th>
-            <th class="px-6 py-4 text-center">Responsables</th>
+            <th class="px-6 py-4 text-center">Estado</th>
             <th class="px-6 py-4 text-center">Acciones</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-tarea let-rowIndex="rowIndex">
-          <tr [ngClass]="{'bg-gray-100': rowIndex % 2 === 0, 'bg-white': rowIndex % 2 !== 0}" class="border-b border-gray-300">
-            <td class="px-6 py-4 text-center">{{ tarea.id }}</td>
+          <tr [ngClass]="{'bg-gray-100': rowIndex % 2 === 0, 'bg-white': rowIndex % 2 !== 0}"
+            class="border-b border-gray-300">
             <td class="px-6 py-4 text-center">{{ tarea.nombre }}</td>
             <td class="px-6 py-4 text-center">{{ tarea.descripcion }}</td>
             <td class="px-6 py-4 text-center">{{ tarea.fechaInicio }}</td>
             <td class="px-6 py-4 text-center">{{ tarea.fechaFin }}</td>
-            <td class="px-6 py-4 text-center">{{ tarea.proyectoId }}</td>
-            <td class="px-6 py-4 text-center">{{ getResponsablesNames(tarea.responsables) }}</td>
+            <td class="px-6 py-4 text-center">{{ tarea.estado }}</td>
             <td class="px-6 py-4 space-x-2 flex justify-center">
-              <button class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center" (click)="aceptarTarea(rowIndex)">
-                <i class="bx bx-check mr-2"></i> Aceptar
+              <button
+                class="bg-gray-500 hover:bg-gray-600  text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center"
+                (click)="verDetalles(rowIndex)">
+                <i class="bx bx-info-circle mr-2"></i>Detalles
               </button>
-              <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg flex items-center justify-center" (click)="denegarTarea(rowIndex)">
-                <i class="bx bx-x mr-2"></i> Denegar
+              <button
+                class="bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center"
+                (click)="editarTarea(rowIndex)">
+                <i class="bx bx-edit mr-2"></i> Editar
+              </button>
+              <button
+                class="bg-gray-900 hover:bg-gray-800 text-white px-4 py-2 rounded-lg flex items-center justify-center"
+                (click)="eliminarTarea(rowIndex)">
+                <i class="bx bx-trash"></i>
               </button>
             </td>
           </tr>
         </ng-template>
       </p-table>
     </div>
+
+    <div *ngIf="modalVisible" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center z-50">
+      <div class="bg-white p-8 rounded-xl shadow-2xl max-w-md w-full mx-4 transform transition-all duration-300 ease-in-out">
+        <h3 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">Detalles de la Tarea</h3>
+        <div class="space-y-4">
+          <p class="flex items-center">
+            <span class="text-gray-600 font-semibold w-28">Responsable:</span>
+            <span class="text-gray-800">{{ tareaSeleccionada?.responsable }}</span>
+          </p>
+          <p class="flex items-center">
+            <span class="text-gray-600 font-semibold w-28">Email:</span>
+            <span class="text-gray-800">{{ tareaSeleccionada?.email }}</span>
+          </p>
+          <p class="flex items-center">
+            <span class="text-gray-600 font-semibold w-28">Rol:</span>
+            <span class="text-gray-800">{{ tareaSeleccionada?.rol }}</span>
+          </p>
+        </div>
+        <div class="mt-8 flex justify-end">
+          <button (click)="cerrarModal()"
+            class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    </div>
   </div>
-</div>
