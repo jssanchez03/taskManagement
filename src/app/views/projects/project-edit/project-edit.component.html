@@ -12,18 +12,18 @@
         <div class="flex flex-col">
           <label for="name" class="text-gray-700 font-bold mb-2">Nombre:</label>
           <input id="name" formControlName="name" type="text" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-          <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="text-red-500 mt-1">
-            <span *ngIf="name?.errors?.['required']">El nombre es obligatorio.</span>
-            <span *ngIf="name?.errors?.['minlength']">El nombre debe tener al menos 3 caracteres</span>
+          <div *ngIf="projectForm.get('name')?.invalid && (projectForm.get('name')?.dirty || projectForm.get('name')?.touched)" class="text-red-500 mt-1">
+            <span *ngIf="projectForm.get('name')?.errors?.['required']">El nombre es obligatorio.</span>
+            <span *ngIf="projectForm.get('name')?.errors?.['minlength']">El nombre debe tener al menos 3 caracteres</span>
           </div>
         </div>
 
         <div class="flex flex-col">
           <label for="description" class="text-gray-700 font-bold mb-2">Descripción:</label>
           <textarea id="description" formControlName="description" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-          <div *ngIf="description?.invalid && (description?.dirty || description?.touched)" class="text-red-500 mt-1">
-            <span *ngIf="description?.errors?.['required']">La descripción es obligatoria.</span>
-            <span *ngIf="description?.errors?.['minlength']">La descripción debe tener al menos 10 caracteres</span>
+          <div *ngIf="projectForm.get('description')?.invalid && (projectForm.get('description')?.dirty || projectForm.get('description')?.touched)" class="text-red-500 mt-1">
+            <span *ngIf="projectForm.get('description')?.errors?.['required']">La descripción es obligatoria.</span>
+            <span *ngIf="projectForm.get('description')?.errors?.['minlength']">La descripción debe tener al menos 10 caracteres</span>
           </div>
         </div>
       </div>
@@ -32,32 +32,32 @@
         <div class="flex flex-col">
           <label for="startDate" class="text-gray-700 font-bold mb-2">Fecha Inicio:</label>
           <input id="startDate" formControlName="startDate" type="date" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-          <div *ngIf="startDate?.invalid && (startDate?.dirty || startDate?.touched)" class="text-red-500 mt-1">
-            <span *ngIf="startDate?.errors?.['required']">La fecha de inicio es obligatoria</span>
+          <div *ngIf="projectForm.get('startDate')?.invalid && (projectForm.get('startDate')?.dirty || projectForm.get('startDate')?.touched)" class="text-red-500 mt-1">
+            <span *ngIf="projectForm.get('startDate')?.errors?.['required']">La fecha de inicio es obligatoria</span>
           </div>
         </div>
 
         <div class="flex flex-col">
           <label for="endDate" class="text-gray-700 font-bold mb-2">Fecha Fin:</label>
           <input id="endDate" formControlName="endDate" type="date" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-          <div *ngIf="endDate?.invalid && (endDate?.dirty || endDate?.touched)" class="text-red-500 mt-1">
-            <span *ngIf="endDate?.errors?.['required']">La fecha de fin es obligatoria</span>
+          <div *ngIf="projectForm.get('endDate')?.invalid && (projectForm.get('endDate')?.dirty || projectForm.get('endDate')?.touched)" class="text-red-500 mt-1">
+            <span *ngIf="projectForm.get('endDate')?.errors?.['required']">La fecha de fin es obligatoria</span>
           </div>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="flex flex-col">
-          <label for="status" class="text-gray-700 font-bold mb-2">Estado:</label>
-          <select id="status" formControlName="status" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <label for="state" class="text-gray-700 font-bold mb-2">Estado:</label>
+          <select id="state" formControlName="state" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
             <option value="">Seleccione un estado</option>
             <option value="Listo">Listo</option>
             <option value="En progreso">En progreso</option>
             <option value="Pendiente">Pendiente</option>
             <option value="Estancado">Estancado</option>
           </select>
-          <div *ngIf="status?.invalid && (status?.dirty || status?.touched)" class="text-red-500 mt-1">
-            <span *ngIf="status?.errors?.['required']">El estado es obligatorio</span>
+          <div *ngIf="projectForm.get('state')?.invalid && (projectForm.get('state')?.dirty || projectForm.get('state')?.touched)" class="text-red-500 mt-1">
+            <span *ngIf="projectForm.get('state')?.errors?.['required']">El estado es obligatorio</span>
           </div>
         </div>
 
@@ -68,7 +68,6 @@
             <option *ngFor="let user of users" [value]="user?.id">{{ user?.name }} {{ user?.lastname }}</option>
           </select>
         </div>
-
       </div>
 
       <div class="flex justify-center mt-4">

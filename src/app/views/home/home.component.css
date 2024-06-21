@@ -1,3 +1,159 @@
-*{
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1440' height='720' preserveAspectRatio='none' viewBox='0 0 1440 720'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1031%26quot%3b)' fill='none'%3e%3crect width='1440' height='720' x='0' y='0' fill='url(%26quot%3b%23SvgjsRadialGradient1032%26quot%3b)'%3e%3c/rect%3e%3cpath d='M-23.31603449852576 435.07693546672624L91.9742883195432 397.61683879808555 54.51419165090251 282.3265159800166-60.77613116716645 319.7866126486573z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M975.5740040348705 698.3422776220002L1041.9938572934932 644.5565409660123 928.1053256801999 571.8196294060724z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M-2.78 555.6 a158.52 158.52 0 1 0 317.04 0 a158.52 158.52 0 1 0 -317.04 0z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M606.26 127.77 a186.57 186.57 0 1 0 373.14 0 a186.57 186.57 0 1 0 -373.14 0z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M712.7744349542976 383.41246731461575L667.67989091198 521.7504680182299 792.5349148638388 497.4811098650703z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M682.7924217080283 552.0101039829603L807.2622463789197 464.8553944687612 720.1075368647206 340.3855697978698 595.6377121938292 427.54027931206895z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M1145.504%2c141.496C1178.333%2c143.825%2c1213.974%2c137.819%2c1232.23%2c110.434C1252.214%2c80.457%2c1251.051%2c41.024%2c1233.433%2c9.597C1215.418%2c-22.538%2c1182.316%2c-45.701%2c1145.504%2c-44.27C1110.642%2c-42.914%2c1083.545%2c-15.555%2c1068.672%2c16.004C1055.883%2c43.139%2c1062.094%2c73.892%2c1077.758%2c99.476C1092.629%2c123.766%2c1117.094%2c139.481%2c1145.504%2c141.496' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M551.926%2c486.294C592.32%2c484.302%2c623.589%2c454.242%2c642.628%2c418.561C660.432%2c385.195%2c661.523%2c346.514%2c644.542%2c312.722C625.459%2c274.748%2c594.347%2c240.637%2c551.926%2c238.07C505.532%2c235.263%2c460.51%2c259.748%2c437.624%2c300.202C415.052%2c340.102%2c420.29%2c389.28%2c444.283%2c428.342C467.142%2c465.558%2c508.303%2c488.445%2c551.926%2c486.294' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1031'%3e%3crect width='1440' height='720' fill='white'%3e%3c/rect%3e%3c/mask%3e%3cradialGradient cx='0%25' cy='50%25' r='1484.32' gradientUnits='userSpaceOnUse' id='SvgjsRadialGradient1032'%3e%3cstop stop-color='%230e2a47' offset='0'%3e%3c/stop%3e%3cstop stop-color='%2300459e' offset='1'%3e%3c/stop%3e%3c/radialGradient%3e%3cstyle%3e %40keyframes float1 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-10px%2c 0)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float1 %7b animation: float1 5s infinite%3b %7d %40keyframes float2 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-5px%2c -5px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float2 %7b animation: float2 4s infinite%3b %7d %40keyframes float3 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(0%2c -10px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float3 %7b animation: float3 6s infinite%3b %7d %3c/style%3e%3c/defs%3e%3c/svg%3e");
+/* General Styles */
+
+.text-center {
+  max-width: 600px;
+}
+
+.bg-opacity-50 {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+  .text-4xl {
+    font-size: 2rem;
+  }
+
+  .text-xl {
+    font-size: 1.25rem;
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.bg-gray-900 {
+  background-color: #1a202c;
+}
+
+.text-gray-700 {
+  color: #4a5568;
+}
+
+/* Pinterest Grid Styles */
+.pinterest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 0.5rem; /* Adjusted for less separation */
+  padding: 1rem;
+}
+
+.card {
+  background-color: #ffffff;
+  padding: 1rem; /* Reduced padding for better fit */
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Slightly smaller shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Smaller lift on hover */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Title Styles */
+h1 {
+  transition: color 0.3s ease;
+}
+
+h1:hover {
+  color: #1e90ff;
+}
+
+/* Text Styles */
+p {
+  transition: color 0.3s ease;
+}
+
+p:hover {
+  color: #1e90ff;
+}
+
+/* Adding additional spacing */
+.section {
+  padding: 1rem; /* Reduced padding for better fit */
+}
+
+/* Additional Hover Effects */
+.bg-gray-900:hover {
+  background-color: #2d3748;
+}
+
+.shadow-lg {
+  box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.shadow-lg:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 5px 10px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Button Styles */
+.button {
+  display: inline-block;
+  padding: 0.5rem 1rem; /* Reduced padding for better fit */
+  background-color: #1e90ff;
+  color: #fff;
+  border-radius: 0.375rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 1rem;
+}
+
+.button:hover {
+  background-color: #63b3ed;
+  transform: translateY(-3px); /* Smaller lift on hover */
 }

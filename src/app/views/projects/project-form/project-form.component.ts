@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
 import { ProjectService } from '../../../services/project/project.service';
 import { UserService } from '../../../services/user/user.service';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-project-form',
@@ -17,11 +17,14 @@ export class ProjectFormComponent implements OnInit {
   projectForm: FormGroup;
   users: any;
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private projectService: ProjectService,
     private userService: UserService
-  ) {
-    this.getAllUsersCombo();
+  ) {}
+
+  ngOnInit(): void {
+    this.getAllUsers();
     this.projectForm = this.fb.group({
       name: ['', Validators.required],
       description: [''],
@@ -32,26 +35,34 @@ export class ProjectFormComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
-
   onSubmit() {
     if (this.projectForm.valid) {
-      console.log('Formulario enviado', this.projectForm.value);
-      this.save(this.projectForm.value);
+      this.saveProject(this.projectForm.value);
     } else {
-      console.log('Formulario inválido');
+      this.showAlert('Formulario inválido', 'Revise los campos del formulario.', 'error');
     }
   }
 
-  getAllUsersCombo() {
+  getAllUsers() {
     this.userService.listUsersCombo().then(users => this.users = users);
   }
 
-  async save(project: any){
-    try{
+  async saveProject(project: any) {
+    try {
       await this.projectService.save(project);
-    }catch{
-      console.error("Error al guardar proyecto");
+      this.showAlert('Éxito', 'Proyecto guardado exitosamente.', 'success');
+    } catch (error) {
+      console.error("Error al guardar proyecto", error);
+      this.showAlert('Error', `Hubo un error al guardar el proyecto:`, 'error');
     }
+  }
+
+  showAlert(title: string, text: string, icon: any): void {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon,
+      confirmButtonText: 'OK'
+    });
   }
 }

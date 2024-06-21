@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validator
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../services/user/user.service';
 import { RolService } from '../../../services/rol/rol.service';
+import Swal from 'sweetalert2';
 
 export interface Rol {
   id: string,
@@ -21,11 +22,12 @@ export interface Rol {
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.css'
 })
-export class UserFormComponent implements  OnInit {
+export class UserFormComponent implements OnInit {
   userForm: FormGroup;
   roles: Rol[];
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private userService: UserService,
     public rolService: RolService
   ) { }
@@ -53,8 +55,11 @@ export class UserFormComponent implements  OnInit {
       this.save(this.userForm.value);
     } else {
       console.log('Formulario inválido. Revise los campos.');
-      console.log(this.userForm.value);
-      console.log(this.findInvalidControls());
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Formulario inválido. Revise los campos.'
+      });
     }
   }
 
@@ -67,14 +72,22 @@ export class UserFormComponent implements  OnInit {
         }
     }
     return invalid;
-}
-
-  async save(user: any){
-    try{
-      await this.userService.save(user);
-    }catch{
-      console.error("Error al guardar usuario");
-    }
   }
 
+  async save(user: any) {
+    try {
+      await this.userService.save(user);
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: 'El usuario ha sido guardado correctamente'
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un problema al guardar el usuario'
+      });
+    }
+  }
 }

@@ -5,6 +5,7 @@ import { SidebarComponent } from '../../../components/sidebar/sidebar.component'
 import { TaskService } from '../../../services/task/task.service';
 import { UserService } from '../../../services/user/user.service';
 import { ProjectService } from '../../../services/project/project.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-task-form',
@@ -26,12 +27,11 @@ export class TaskFormComponent implements OnInit {
     private taskService: TaskService,
     private userService: UserService,
     private projectService: ProjectService
-  ) {
-    this.getAllUsersCombo();
-    this.getAllProjectsCombo();
-  }
+  ) {}
 
   ngOnInit(): void {
+    this.getAllUsersCombo();
+    this.getAllProjectsCombo();
     this.taskForm = this.fb.group({
       name: ['', Validators.required],
       description: [''],
@@ -41,15 +41,13 @@ export class TaskFormComponent implements OnInit {
       state: ['', Validators.required],
       projectId: ['', Validators.required]
     });
-
   }
 
   onSubmit() {
     if (this.taskForm.valid) {
-      console.log('Formulario enviado', this.taskForm.value);
       this.save(this.taskForm.value);
     } else {
-      console.log('Formulario inválido');
+      this.showAlert('Formulario inválido', 'Revise los campos del formulario.', 'error');
     }
   }
 
@@ -61,11 +59,22 @@ export class TaskFormComponent implements OnInit {
     this.projectService.listProjects().then(projects => this.projects = projects);
   }
 
-  async save(task: any){
-    try{
+  async save(task: any) {
+    try {
       await this.taskService.save(task);
-    }catch{
-      console.error("Error al guardar tarea");
+      this.showAlert('Éxito', 'Tarea guardada exitosamente.', 'success');
+    } catch (error) {
+      console.error("Error al guardar tarea", error);
+      this.showAlert('Error', 'Hubo un error al guardar la tarea.', 'error');
     }
+  }
+
+  showAlert(title: string, text: string, icon: any): void {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon,
+      confirmButtonText: 'OK'
+    });
   }
 }

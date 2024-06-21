@@ -34,13 +34,13 @@ export class ProjectEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllUsersCombo();
-    
+
     this.projectForm = this.fb.group({
       name: [this.project?.project?.name, Validators.required],
       description: [this.project?.project?.description],
       startDate: [this.formatDate(this.project?.project?.startDate), Validators.required],
       endDate: [this.formatDate(this.project?.project?.endDate), Validators.required],
-      status: [this.project?.project?.status, Validators.required],
+      state: [this.project?.project?.state, Validators.required],
       idLeader: ['', Validators.required]
     });
   }
@@ -55,7 +55,7 @@ export class ProjectEditComponent implements OnInit {
   }
 
   async getProjectValues(id: string){
-    try{ 
+    try{
       this.project = await this.projectService.findById(id);
       console.log(this.project);
     }catch{

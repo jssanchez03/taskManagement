@@ -3,6 +3,7 @@ import { SidebarComponent } from '../../../components/sidebar/sidebar.component'
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RolService } from '../../../services/rol/rol.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-rol-form',
@@ -17,7 +18,8 @@ import { RolService } from '../../../services/rol/rol.service';
 export class RolFormComponent implements OnInit {
   rolForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private rolService: RolService
   ) { }
 
@@ -34,10 +36,28 @@ export class RolFormComponent implements OnInit {
       this.save(this.rolForm.value);
     } else {
       console.log('Formulario de rol inválido. Revise los campos.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Formulario de rol inválido. Revise los campos.'
+      });
     }
   }
 
-  async save(rol: any){
-    await this.rolService.save(rol);
+  async save(rol: any) {
+    try {
+      await this.rolService.save(rol);
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: 'El rol ha sido guardado correctamente'
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un problema al guardar el rol'
+      });
+    }
   }
 }
