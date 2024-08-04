@@ -13,6 +13,12 @@ import { UserEditComponent } from './views/user/user-edit/user-edit.component';
 import { TaskEditComponent } from './views/tasks/task-edit/task-edit.component';
 import { RolEditComponent } from './views/rol/rol-edit/rol-edit.component';
 import { ProjectEditComponent } from './views/projects/project-edit/project-edit.component';
+import { WorkteamFormComponent } from './views/workteam/workteam-form/workteam-form.component';
+import { WorkteamListComponent } from './views/workteam/workteam-list/workteam-list.component';
+import { UserWorkteamFormComponent } from './views/workteam/user-workteam-form/user-workteam-form.component';
+import { UserWorkteamListComponent } from './views/workteam/user-workteam-list/user-workteam-list.component';
+import { CompanyFormComponent } from './views/company/company-form/company-form.component';
+import { CompanyListComponent } from './views/company/company-list/company-list.component';
 
 export const routes: Routes = [
   {
@@ -72,6 +78,31 @@ export const routes: Routes = [
     path: 'user-edit',
     component: UserEditComponent,
   },
+  {
+    path: 'workteam-form',
+    component: WorkteamFormComponent,
+  },
+  {
+    path: 'workteam-list',
+    component: WorkteamListComponent,
+  },
+  {
+    path: 'user-workteam-form',
+    component: UserWorkteamFormComponent,
+  },
+  {
+    path: 'user-workteam-list',
+    component: UserWorkteamListComponent,
+  },
+  {
+    path: 'company-form',
+    component: CompanyFormComponent
+  },
+  {
+    path: 'company-list',
+    component: CompanyListComponent
+  },
+
 ];
 
 @NgModule({

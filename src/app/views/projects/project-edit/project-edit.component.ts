@@ -1,87 +1,137 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
 import { ProjectService } from '../../../services/project/project.service';
 import { UserService } from '../../../services/user/user.service';
+import { CompanyService } from '../../../services/company/company.service';
+import Swal from 'sweetalert2';
 
+interface Project {
+  id: string; // We'll treat UUID as string in frontend
+  name: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  progress: number;
+  state: string;
+  idLeader: string;
+  companyId: string; // We'll treat UUID as string in frontend
+}
 
 @Component({
   selector: 'app-project-edit',
   standalone: true,
-  imports: [SidebarComponent, CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, SidebarComponent],
   templateUrl: './project-edit.component.html',
   styleUrl: './project-edit.component.css'
 })
-
 export class ProjectEditComponent implements OnInit {
   projectForm: FormGroup;
-  project: any;
   projectId: string;
   users: any;
+  companies: any;
 
-  constructor(private fb: FormBuilder,
-    private ActivatedRoute: ActivatedRoute,
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
     private projectService: ProjectService,
-    private userService: UserService
+    private userService: UserService,
+    private companyService: CompanyService
   ) {
-    this.ActivatedRoute.queryParams.subscribe(params => {
-      this.projectId = params['project'];
-    });
-    this.getProjectValues(this.projectId);
     this.projectForm = this.fb.group({
-      name: [this.project?.project?.name, Validators.required],
-      description: [this.project?.project?.description],
-      startDate: [this.formatDate(this.project?.project?.startDate), Validators.required],
-      endDate: [this.formatDate(this.project?.project?.endDate), Validators.required],
-      state: [this.project?.project?.state, Validators.required],
-      idLeader: ['', Validators.required]
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      description: ['', [Validators.required, Validators.minLength(10)]],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+      state: ['', Validators.required],
+      idLeader: ['', Validators.required],
+      companyId: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
-    this.getAllUsersCombo();
-    this.getProjectValues(this.projectId);
-
+    this.route.queryParams.subscribe(params => {
+      this.projectId = params['project'];
+      if (this.projectId) {
+        this.getProjectValues(this.projectId);
+      }
+    });
+    this.getAllUsers();
+    this.getAllCompanies();
   }
 
-  // Método para convertir la fecha al formato yyyy-MM-dd
   formatDate(dateString: string): string {
+    if (!dateString) return '';
     const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${year}-${month}-${day}`;
+    return date.toISOString().split('T')[0];
   }
 
-  async getProjectValues(id: string){
-    try{
-      this.project = await this.projectService.findById(id);
-      console.log(this.project);
-    }catch{
-      console.error("Error al obtener proyecto");
+  async getProjectValues(id: string) {
+    try {
+      const response = await this.projectService.findById(id);
+      console.log('Datos del proyecto recibidos:', response);
+      if (response && response.project) {
+        const project = response.project;
+        this.projectForm.patchValue({
+          name: project.name,
+          description: project.description,
+          startDate: this.formatDate(project.startDate),
+          endDate: this.formatDate(project.endDate),
+          state: project.state,
+          idLeader: project.idLeader,
+          companyId: project.companyId
+        });
+
+        if (!response.userLeader) {
+          console.warn('No se pudo obtener la información del líder del proyecto');
+          // Puedes mostrar una alerta o manejar este caso como prefieras
+        }
+      } else {
+        throw new Error('Proyecto no encontrado');
+      }
+    } catch (error) {
+      console.error("Error al obtener proyecto", error);
+      this.showAlert('Error', 'No se pudo cargar la información del proyecto.', 'error');
     }
   }
 
-  getAllUsersCombo() {
+  getAllUsers() {
     this.userService.listUsersCombo().then(users => this.users = users);
+  }
+
+  getAllCompanies() {
+    this.companyService.getCompanies().subscribe(
+      companies => this.companies = companies,
+      error => console.error('Error al obtener empresas:', error)
+    );
   }
 
   onSubmit() {
     if (this.projectForm.valid) {
-      console.log('Formulario enviado', this.projectForm.value);
-      this.update(this.projectId, this.projectForm.value);
+      this.updateProject(this.projectId, this.projectForm.value);
     } else {
-      console.log('Formulario inválido');
+      this.showAlert('Formulario inválido', 'Por favor, revise los campos del formulario.', 'error');
     }
   }
 
-  async update(id: string, project: any){
-    try{
+  async updateProject(id: string, project: any) {
+    try {
       await this.projectService.updateById(id, project);
-    }catch{
-      console.error("Error al guardar proyecto");
+      this.showAlert('Éxito', 'Proyecto actualizado exitosamente.', 'success');
+    } catch (error) {
+      console.error("Error al actualizar proyecto", error);
+      this.showAlert('Error', 'Hubo un error al actualizar el proyecto.', 'error');
     }
+  }
+
+  showAlert(title: string, text: string, icon: any): void {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon,
+      confirmButtonText: 'OK'
+    });
   }
 }

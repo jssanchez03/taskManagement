@@ -1,5 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
+
+interface ProjectWithLeader {
+  project: any;
+  userLeader: any;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -36,17 +42,21 @@ export class ProjectService {
     })
   }
 
-  findById(id: string){
-    return new Promise(resolve => {
-      this.http.get(this.url + 'findById/' + id).subscribe({
-        next:(data) =>{
-          resolve(data);
-        },
-        error: (err)=>{
-          console.log(err);
-        }
-      });
-    })
+  // findById(id: string){
+  //   return new Promise(resolve => {
+  //     this.http.get(this.url + 'findById/' + id).subscribe({
+  //       next:(data) =>{
+  //         resolve(data);
+  //       },
+  //       error: (err)=>{
+  //         console.log(err);
+  //       }
+  //     });
+  //   })
+  // }
+
+  findById(id: string): Promise<ProjectWithLeader> {
+    return firstValueFrom(this.http.get<ProjectWithLeader>(this.url + 'findById/' + id));
   }
 
   deleteById(id: string){

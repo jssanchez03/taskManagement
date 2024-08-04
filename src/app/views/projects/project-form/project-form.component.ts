@@ -5,6 +5,7 @@ import { SidebarComponent } from '../../../components/sidebar/sidebar.component'
 import { ProjectService } from '../../../services/project/project.service';
 import { UserService } from '../../../services/user/user.service';
 import Swal from 'sweetalert2';
+import { CompanyService } from '../../../services/company/company.service';
 
 @Component({
   selector: 'app-project-form',
@@ -16,22 +17,26 @@ import Swal from 'sweetalert2';
 export class ProjectFormComponent implements OnInit {
   projectForm: FormGroup;
   users: any;
+  companies: any;
 
   constructor(
     private fb: FormBuilder,
     private projectService: ProjectService,
-    private userService: UserService
+    private userService: UserService,
+    private companyService: CompanyService
   ) {}
 
   ngOnInit(): void {
     this.getAllUsers();
+    this.getAllCompanies();
     this.projectForm = this.fb.group({
       name: ['', Validators.required],
       description: [''],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       state: ['', Validators.required],
-      idLeader: ['', Validators.required]
+      idLeader: ['', Validators.required],
+      companyId: ['', Validators.required]
     });
   }
 
@@ -45,6 +50,13 @@ export class ProjectFormComponent implements OnInit {
 
   getAllUsers() {
     this.userService.listUsersCombo().then(users => this.users = users);
+  }
+
+  getAllCompanies() {
+    this.companyService.getCompanies().subscribe(
+      companies => this.companies = companies,
+      error => console.error('Error fetching companies:', error)
+    );
   }
 
   async saveProject(project: any) {

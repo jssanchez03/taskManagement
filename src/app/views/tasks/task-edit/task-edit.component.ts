@@ -35,58 +35,71 @@ export class TaskEditComponent implements OnInit {
 
   taskForm: FormGroup;
 
-  constructor(private fb: FormBuilder,
-    private ActivatedRoute: ActivatedRoute,
+  constructor(
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute,
     private taskService: TaskService,
     private userService: UserService,
     private projectService: ProjectService
   ) {
-    this.ActivatedRoute.queryParams.subscribe(params => {
+    this.activatedRoute.queryParams.subscribe(params => {
       this.taskId = params['task'];
     });
-
-    this.getTaskValues(this.taskId);
   }
 
   ngOnInit(): void {
     this.taskForm = this.fb.group({
-      name: [this.task?.task.name, Validators.required],
-      description: [this.task?.task.description],
-      startDate: [this.formatDate(this.task?.task.startDate), Validators.required],
-      endDate: [this.formatDate(this.task?.task.endDate), Validators.required],
+      name: ['', Validators.required],
+      description: [''],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
       responsible: ['', Validators.required],
       projectId: ['', Validators.required],
       state: ['', Validators.required]
     });
 
+    this.getTaskValues(this.taskId);
     this.loadUsuarios();
     this.loadProjects();
-
-    if (this.tarea) {
-      this.taskForm.patchValue(this.tarea);
-    }
   }
 
   loadUsuarios() {
     this.userService.listUsersCombo().then(users => this.usuarios = users);
   }
+
   loadProjects() {
-    this.projectService.listProjects().then(p => this.proyectos = p);
+    this.projectService.listProjects().then(projects => this.proyectos = projects);
   }
+
+  async getTaskValues(id: string) {
+    try {
+      this.task = await this.taskService.findById(id);
+      console.log('Datos de la tarea:', this.task);
+      this.updateForm(this.task);
+    } catch {
+      console.error("Error al obtener tarea");
+    }
+  }
+
+
+  updateForm(task: any) {
+    this.taskForm.patchValue({
+      name: task.name,
+      description: task.description,
+      startDate: this.formatDate(task.startDate),
+      endDate: this.formatDate(task.endDate),
+      responsible: task.responsible,
+      projectId: task.projectId,
+      state: task.state
+    });
+  }
+
   formatDate(dateString: string): string {
     const date = new Date(dateString);
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
-  }
-
-  async getTaskValues(id: string){
-    try{
-      this.task = await this.taskService.findById(id);
-    }catch{
-      console.error("Error al obtener tarea");
-    }
   }
 
   onSubmit() {
@@ -99,12 +112,12 @@ export class TaskEditComponent implements OnInit {
     }
   }
 
-  async update(id: string, task: any){
-    try{
+  async update(id: string, task: any) {
+    try {
       await this.taskService.updateById(id, task);
       this.showAlert('Éxito', 'Tarea editada exitosamente.', 'success');
-    }catch{
-      console.error("Error al guardar usuario");
+    } catch {
+      console.error("Error al guardar tarea");
       this.showAlert('Error', 'Hubo un error al editar la tarea.', 'error');
     }
   }

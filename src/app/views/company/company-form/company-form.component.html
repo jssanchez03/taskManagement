@@ -1,0 +1,36 @@
+<app-sidebar></app-sidebar>
+
+<div class="flex justify-center items-center h-screen">
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <div class="text-center mb-6">
+      <h2 class="text-2xl font-bold text-gray-800">Gestión de Empresas</h2>
+      <p class="text-gray-600">Complete el siguiente formulario para crear o actualizar una empresa.</p>
+    </div>
+
+    <form [formGroup]="companyForm" (ngSubmit)="onSubmit()" class="grid gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex flex-col">
+          <label for="name" class="text-gray-700 font-bold mb-2">Nombre de la Empresa</label>
+          <input id="name" formControlName="name" type="text" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+          <div *ngIf="companyForm.get('name')?.invalid && (companyForm.get('name')?.dirty || companyForm.get('name')?.touched)" class="text-red-500 mt-1">
+            <span *ngIf="companyForm.get('name')?.errors?.['required']">Ingrese el nombre de la empresa</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col">
+          <label for="description" class="text-gray-700 font-bold mb-2">Descripción</label>
+          <textarea id="description" formControlName="description" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+          <div *ngIf="companyForm.get('description')?.invalid && (companyForm.get('description')?.dirty || companyForm.get('description')?.touched)" class="text-red-500 mt-1">
+            <span *ngIf="companyForm.get('description')?.errors?.['required']">Ingrese una descripción</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center mt-4">
+        <button type="submit" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

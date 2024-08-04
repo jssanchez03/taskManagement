@@ -37,6 +37,20 @@
         <li><a class="link_name" routerLink="/task-form">Añadir Tareas</a></li>
       </ul>
     </li>
+    <li>
+      <div class="iocn-link">
+        <a routerLink="/company-list">
+          <i class='bx bxs-buildings'></i>
+          <span class="link_name">Empresas</span>
+        </a>
+        <i class='bx bxs-chevron-down arrow'></i>
+      </div>
+      <ul class="sub-menu">
+        <li><a class="link_name" routerLink="/company-list">Empresa</a></li>
+        <li><a routerLink="/company-list">Lista de empresas</a></li>
+        <li><a routerLink="/company-form">Añadir empresas</a></li>
+      </ul>
+    </li>
     <!-- <li>
       <div class="iocn-link">
         <a routerLink="/task-list">
@@ -65,6 +79,7 @@
         <li><a routerLink="/user-form">Añadir usuarios</a></li>
       </ul>
     </li>
+
     <li>
       <div class="iocn-link">
         <a routerLink="/rol-list">
@@ -79,6 +94,24 @@
         <li><a routerLink="/rol-form">Añadir roles</a></li>
       </ul>
     </li>
+
+    <li>
+      <div class="iocn-link">
+        <a routerLink="/workteam-list">
+          <i class='bx bxl-microsoft-teams'></i>
+          <span class="link_name">Equipos</span>
+        </a>
+        <i class='bx bxs-chevron-down arrow'></i>
+      </div>
+      <ul class="sub-menu">
+        <li><a class="link_name" routerLink="/workteam-list">Equipos de Trabajo</a></li>
+        <li><a routerLink="/workteam-list">Lista de equipos</a></li>
+        <li><a routerLink="/user-workteam-list">Lista de asignaciones de usuarios</a></li>
+        <li><a routerLink="/workteam-form">Añadir equipos de trabajo</a></li>
+        <li><a routerLink="/user-workteam-form">Asignaciones de usuarios</a></li>
+      </ul>
+    </li>
+
     <li>
       <div class="profile-details">
         <div class="profile-content">
@@ -93,8 +126,4 @@
     </li>
   </ul>
 </div>
-<!-- <section class="home-section">
-  <div class="home-content">
-    <i class='bx bx-menu' (click)="toggleSidebar()"></i>
-  </div>
-</section> -->
+

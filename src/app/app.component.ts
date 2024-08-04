@@ -6,6 +6,7 @@ import { ProjectListComponent } from './views/projects/project-list/project-list
 import { HomeComponent } from './views/home/home.component';
 import { LayoutComponent } from './views/layout/layout.component';
 import { TaskFormComponent } from './views/tasks/task-form/task-form.component';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
     selector: 'app-root',
@@ -19,6 +20,7 @@ import { TaskFormComponent } from './views/tasks/task-form/task-form.component';
       TaskFormComponent,
       HomeComponent,
       LayoutComponent,
+      DropdownModule,
       SidebarComponent]
 })
 export class AppComponent {

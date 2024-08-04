@@ -1,0 +1,37 @@
+<app-sidebar></app-sidebar>
+<div class="landing-page min-h-screen flex flex-col justify-center items-center">
+  <header class="text-center">
+    <h1 class="text-4xl font-bold mb-4">Bienvenidos a Gestión de Equipos</h1>
+    <p class="text-lg text-gray-700">Administra los equipos de trabajo de tu aplicación de manera eficiente.</p>
+  </header>
+
+  <div class="mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8">
+    <div class="table-responsive mt-8 rounded-lg overflow-hidden shadow-lg bg-white">
+      <h2 class="text-2xl px-6 py-4 bg-gray-200 text-gray-800 text-center text-white" style="background-color: #1d1b31;">Lista de Equipos de Trabajo</h2>
+      <p-table [value]="workTeams" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }" class="w-full">
+        <ng-template pTemplate="header">
+          <tr class="bg-gray-300">
+            <th class="px-6 py-4 text-center">Nombre del Equipo</th>
+            <th class="px-6 py-4 text-center">Descripción</th>
+            <th class="px-6 py-4 text-center">Opciones</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-workTeam let-rowIndex="rowIndex">
+          <tr [ngClass]="{'bg-gray-100': rowIndex % 2 === 0, 'bg-white': rowIndex % 2 !== 0}" class="border-b border-gray-300">
+            <td class="px-6 py-4 text-center">{{ workTeam.name }}</td>
+            <td class="px-6 py-4 text-center">{{ workTeam.description }}</td>
+            <td class="px-6 py-4 space-x-2 flex justify-center">
+              <button class="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center" (click)="editarWorkTeam(workTeam.id)">
+                <i class="bx bx-edit"></i>
+              </button>
+              <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg flex items-center justify-center" (click)="eliminarWorkTeam(workTeam.id)">
+                <i class="bx bx-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+</div>

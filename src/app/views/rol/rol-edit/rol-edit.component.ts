@@ -17,31 +17,40 @@ export class RolEditComponent implements OnInit {
   rolId: string;
   rol: any;
 
-  constructor(private formBuilder: FormBuilder,
-    private ActivatedRoute: ActivatedRoute,
+  constructor(
+    private formBuilder: FormBuilder,
+    private activatedRoute: ActivatedRoute,
     private rolService: RolService
   ) {
-    this.ActivatedRoute.queryParams.subscribe(params => {
+    this.activatedRoute.queryParams.subscribe(params => {
       this.rolId = params['rol'];
-    });
-
-    this.getRolValues(this.rolId);
-   }
-
-  ngOnInit(): void {
-    this.rolForm = this.formBuilder.group({
-      name: [this.rol.name || '', Validators.required],
-      description: [this.rol.description || '', Validators.required]
     });
   }
 
-  async getRolValues(id: string){
-    try{ 
+  ngOnInit(): void {
+    this.rolForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required]
+    });
+
+    this.getRolValues(this.rolId);
+  }
+
+  async getRolValues(id: string) {
+    try {
       this.rol = await this.rolService.findById(id);
       console.log(this.rol);
-    }catch{
+      this.updateForm(this.rol);
+    } catch {
       console.error("Error al obtener rol");
     }
+  }
+
+  updateForm(rol: any) {
+    this.rolForm.patchValue({
+      name: rol.name,
+      description: rol.description
+    });
   }
 
   onSubmit(): void {
@@ -54,10 +63,10 @@ export class RolEditComponent implements OnInit {
     }
   }
 
-  async update(idRol: string, rol: any){
-    try{
+  async update(idRol: string, rol: any) {
+    try {
       await this.rolService.updateById(idRol, rol);
-    }catch{
+    } catch {
       console.error("Error al guardar rol");
     }
   }

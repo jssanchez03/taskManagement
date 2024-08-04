@@ -61,18 +61,32 @@
           </div>
         </div>
 
-        <div class="flex items-center">
-          <label for="idLeader" class="block text-gray-700 font-bold mb-2 md:mb-0 md:mr-4">Líder:</label>
-          <select id="idLeader" formControlName="idLeader" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <div class="flex flex-col">
+          <label for="idLeader" class="text-gray-700 font-bold mb-2">Líder:</label>
+          <select id="idLeader" formControlName="idLeader" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
             <option value="">Seleccione un líder</option>
             <option *ngFor="let user of users" [value]="user?.id">{{ user?.name }} {{ user?.lastname }}</option>
           </select>
+          <div *ngIf="projectForm.get('idLeader')?.invalid && (projectForm.get('idLeader')?.dirty || projectForm.get('idLeader')?.touched)" class="text-red-500 mt-1">
+            <span *ngIf="projectForm.get('idLeader')?.errors?.['required']">El líder es obligatorio</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col">
+        <label for="companyId" class="text-gray-700 font-bold mb-2">Empresa:</label>
+        <select id="companyId" formControlName="companyId" class="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="">Seleccione una empresa</option>
+          <option *ngFor="let company of companies" [value]="company.id">{{ company.name }}</option>
+        </select>
+        <div *ngIf="projectForm.get('companyId')?.invalid && (projectForm.get('companyId')?.dirty || projectForm.get('companyId')?.touched)" class="text-red-500 mt-1">
+          <span *ngIf="projectForm.get('companyId')?.errors?.['required']">La empresa es obligatoria</span>
         </div>
       </div>
 
       <div class="flex justify-center mt-4">
         <button type="submit" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-          Editar Proyecto
+          Actualizar Proyecto
         </button>
       </div>
     </form>

@@ -1,0 +1,52 @@
+<app-sidebar></app-sidebar>
+
+<div class="flex justify-center items-center h-screen">
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <div class="text-center mb-6">
+      <h2 class="text-2xl font-bold text-gray-800">Gestión de Usuarios por Equipo</h2>
+      <p class="text-gray-600">Complete el siguiente formulario para asignar usuarios a equipos de trabajo.</p>
+    </div>
+
+    <div class="container mx-auto p-4">
+      <!-- Selección de Usuario -->
+      <div class="mb-4">
+        <label for="usuario" class="block text-gray-700 font-bold mb-2">Seleccionar Usuario:</label>
+        <select
+          id="usuario"
+          [(ngModel)]="selectedUsuario"
+          class="w-full p-2 border border-gray-300 rounded-lg"
+          (ngModelChange)="onUsuarioChange($event)"
+        >
+          <option *ngFor="let usuario of usuarios" [value]="usuario.id">
+            {{ usuario.name }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Selección de Equipo de Trabajo -->
+      <div class="mb-4">
+        <label for="workTeam" class="block text-gray-700 font-bold mb-2">Seleccionar Equipo de Trabajo:</label>
+        <select
+          id="workTeam"
+          [(ngModel)]="selectedWorkTeam"
+          class="w-full p-2 border border-gray-300 rounded-lg"
+          (ngModelChange)="onWorkTeamChange($event)"
+        >
+          <option *ngFor="let workTeam of workTeams" [value]="workTeam.id">
+            {{ workTeam.name }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Botones para guardar o cancelar -->
+      <div class="flex justify-end">
+        <button (click)="guardar()" class="bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
+          Guardar
+        </button>
+        <button (click)="cancelar()" class="ml-4 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
