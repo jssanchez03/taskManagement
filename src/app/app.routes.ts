@@ -1,6 +1,6 @@
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes , Router } from '@angular/router';
 import { ProjectFormComponent } from './views/projects/project-form/project-form.component';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { ProjectListComponent } from './views/projects/project-list/project-list.component';
 import { HomeComponent } from './views/home/home.component';
 import { RolListComponent } from './views/rol/rol-list/rol-list.component';
@@ -19,6 +19,7 @@ import { UserWorkteamFormComponent } from './views/workteam/user-workteam-form/u
 import { UserWorkteamListComponent } from './views/workteam/user-workteam-list/user-workteam-list.component';
 import { CompanyFormComponent } from './views/company/company-form/company-form.component';
 import { CompanyListComponent } from './views/company/company-list/company-list.component';
+import * as Sentry from "@sentry/angular";
 
 export const routes: Routes = [
   {
@@ -107,6 +108,22 @@ export const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [{
+    provide: ErrorHandler,
+    useValue: Sentry.createErrorHandler({
+      showDialog: true,
+    }),
+  }, {
+    provide: Sentry.TraceService,
+    deps: [Router],
+  },
+  {
+    provide: APP_INITIALIZER,
+    useFactory: () => () => { },
+    deps: [Sentry.TraceService],
+    multi: true,
+  },
+  ]
 })
 export class AppRoutingModule { }

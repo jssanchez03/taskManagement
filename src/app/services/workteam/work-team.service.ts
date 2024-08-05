@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class WorkTeamService {
 
-  private url = 'http://localhost:8081/workteams/';
+  private url = 'http://localhost:8083/m1/workteams/';
 
   constructor(private http: HttpClient) { }
 

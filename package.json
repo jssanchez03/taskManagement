@@ -4,10 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && npm run sentry:sourcemaps",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:taskManagement": "node dist/task-management/server/server.mjs"
+    "serve:ssr:taskManagement": "node dist/task-management/server/server.mjs",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org samuel-ju --project javascript-angular dist && sentry-cli sourcemaps upload --org samuel-ju --project javascript-angular dist"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +23,8 @@
     "@angular/router": "^18.0.0",
     "@angular/ssr": "^18.0.2",
     "@fortawesome/fontawesome-free": "^6.5.2",
+    "@sentry/angular": "^8.22.0",
+    "@sentry/cli": "^2.33.1",
     "express": "^4.18.2",
     "primeicons": "^7.0.0",
     "primeng": "^17.18.7",

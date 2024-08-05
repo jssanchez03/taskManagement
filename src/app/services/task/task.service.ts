@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class TaskService {
 
-  url = "http://localhost:8080/task/";
+  url = "http://localhost:8083/m2/task/";
 
   constructor(public http: HttpClient) { }
 

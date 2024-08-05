@@ -12,7 +12,7 @@ interface ProjectWithLeader {
 })
 export class ProjectService {
 
-  url = "http://localhost:8080/project/";
+  url = "http://localhost:8083/m2/project/";
 
   constructor(public http: HttpClient) { }
 
